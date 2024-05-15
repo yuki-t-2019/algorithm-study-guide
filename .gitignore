@@ -1,0 +1,26 @@
+# Compiled files
+*.o
+*.out
+*.gch
+program
+
+# Makefile-generated files
+all.h.gch
+
+# Ignore build directories
+/build/
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore user-specific settings
+*.log
+*.aux
+
+# Ignore swap files
+*~
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
