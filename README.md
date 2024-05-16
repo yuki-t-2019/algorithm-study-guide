@@ -38,7 +38,7 @@ algorithm-study-guide/
 ```
 
 ## Usage
-Using a simple Makefile:
+Using a simple Script:
 ```
 cd [algo-directory]
 ./build_and_run.sh
