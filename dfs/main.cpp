@@ -15,6 +15,9 @@
  * - "No" otherwise
  */
 
+#include <iostream>
+#include <vector>
+
 namespace {
 
 /**
