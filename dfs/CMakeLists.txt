@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22.1)
 project(dfs)
 
-# guard against in-source builds
+# Guard against in-source builds
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
     message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there. You may need to remove CMakeCache.txt. ")
 endif()
@@ -10,10 +10,38 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Add the executable
-add_executable(program main.cpp)
+# Include FetchContent module
+include(FetchContent)
+
+# Fetch GoogleTest
+FetchContent_Declare(
+  googletest
+  # Specify the commit you depend on and update it regularly.
+  URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+# Enable testing
+enable_testing()
+
+# Add the main executable
+add_executable(program main.cpp dfs.cpp)
 
 # Set the output directory for the executable
 set_target_properties(program PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+# Include the directory for header files
+include_directories(${CMAKE_SOURCE_DIR})
+
+# Add the test executable
+add_executable(tests test/test_dfs.cpp dfs.cpp)
+
+# Link test executable with GoogleTest
+target_link_libraries(tests gtest_main)
+
+# Add tests
+add_test(NAME tests COMMAND tests)

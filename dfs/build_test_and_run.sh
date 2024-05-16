@@ -20,10 +20,14 @@ cd build || display_error "Failed to change to build directory."
 cmake .. || display_error "Failed to run CMake."
 
 # Build the project
+echo
 cmake --build . || display_error "Failed to build the project."
 
-# Print an empty line
+# Run the tests
 echo
+ctest || display_error "Tests failed."
 
 # Run the program
+echo
 ./bin/program || display_error "Failed to run the program."
+
