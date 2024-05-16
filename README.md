@@ -13,7 +13,7 @@ While primarily intended as a personal study guide, others are welcome to refere
 
 ### Prerequisites
 - C++ compiler (e.g., g++, clang)
-- CMake (optional, if using CMake to build)
+- CMake
 
 ### Installation
 Clone the repository:
@@ -29,10 +29,8 @@ Each algorithm has its own directory containing the implementation and relevant 
 algorithm-study-guide/
 └── dfs
     ├── all.h
-    ├── all.h.gch
     ├── main.cpp
-    ├── Makefile
-    └── program
+    └── Makefile
 ```
 
 ## Usage
