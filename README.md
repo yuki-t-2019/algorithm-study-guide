@@ -18,7 +18,7 @@ While primarily intended as a personal study guide, others are welcome to refere
 ### Installation
 Clone the repository:
 ```bash
-git clone https://github.com/username/algorithm-study-guide.git
+git clone https://github.com/yuki-t-2019/algorithm-study-guide.git
 cd algorithm-study-guide
 ```
 
