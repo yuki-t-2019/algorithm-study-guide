@@ -1,5 +1,5 @@
 ---
-name: Question report
+name: Question
 about: Ask a question about the project
 title: "[Question] Your concise question here"
 labels: question
