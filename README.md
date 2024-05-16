@@ -12,8 +12,8 @@ While primarily intended as a personal study guide, others are welcome to refere
 ## Getting Started
 
 ### Prerequisites
-- C++ compiler (e.g., g++, clang)
-- CMake
+- C++ compiler (e.g., g++ 11.4.0 or later)
+- CMake (version 3.22.1 or later)
 
 ### Installation
 Clone the repository:
@@ -28,16 +28,20 @@ Each algorithm has its own directory containing the implementation and relevant 
 ```
 algorithm-study-guide/
 └── dfs
-    ├── all.h
-    ├── main.cpp
-    └── Makefile
+│   ├── build_and_run.sh
+│   ├── CMakeLists.txt
+│   ├── main.cpp
+│   └── README.md
+├── LICENSE.txt
+└── README.md
+
 ```
 
 ## Usage
 Using a simple Makefile:
 ```
 cd [algo-directory]
-make run
+./build_and_run.sh
 ```
 
 
