@@ -10,6 +10,7 @@ on:
 
 env:
   BUILD_TYPE: Release
+  ALGORITHM: dfs
 
 jobs:
   build:
@@ -19,11 +20,11 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/dfs/build -S ${{github.workspace}}/dfs -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_TESTING=ON
+      run: cmake -B ${{github.workspace}}/${{ env.ALGORITHM }}/build -S ${{github.workspace}}/${{ env.ALGORITHM }} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_TESTING=ON
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/dfs/build --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}/${{ env.ALGORITHM }}/build --config ${{env.BUILD_TYPE}}
 
     - name: Test
-      working-directory: ${{github.workspace}}/dfs/build
+      working-directory: ${{github.workspace}}/${{ env.ALGORITHM }}/build
       run: ctest -C ${{env.BUILD_TYPE}} --output-on-failure --verbose
