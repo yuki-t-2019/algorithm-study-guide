@@ -1,0 +1,29 @@
+name: DFS CI
+on:
+  push:
+    paths:
+      - '${{ env.ALGORITHM }}/**'
+  pull_request:
+    paths:
+      - '${{ env.ALGORITHM }}/**'
+
+env:
+  BUILD_TYPE: Release
+  ALGORITHM: dfs
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/${{ env.ALGORITHM }}/build -S ${{github.workspace}}/${{ env.ALGORITHM }} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_TESTING=ON
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/${{ env.ALGORITHM }}/build --config ${{env.BUILD_TYPE}}
+
+    - name: Test
+      working-directory: ${{github.workspace}}/${{ env.ALGORITHM }}/build
+      run: ctest -C ${{env.BUILD_TYPE}} --output-on-failure --verbose
