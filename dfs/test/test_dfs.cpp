@@ -4,13 +4,13 @@
  * File: test_dfs.cpp
  */
 
-#include "src/dfs.h"
 #include <gtest/gtest.h>
 #include <limits>
+#include "src/dfs.h"
 
 // Input constraints tests
 TEST(DFSTest, ThrowsExceptionForEmptyInputList) {
-    std::vector<int> elements; // empty input list
+    std::vector<int> elements;  // empty input list
     int target_sum = 0;
     EXPECT_THROW(Dfs(0, 0, elements, target_sum), std::invalid_argument);
 }
@@ -71,13 +71,15 @@ TEST(DFSTest, MultipleElementListNotMatchingTargetSum) {
 }
 
 TEST(DFSTest, DuplicateElementsInInputList) {
-    std::vector<int> elements = {2, 3, 4, 2}; // List containing duplicate elements
+    // List containing duplicate elements
+    std::vector<int> elements = {2, 3, 4, 2};
     int target_sum = 6;
     EXPECT_TRUE(Dfs(0, 0, elements, target_sum));
 }
 
 TEST(DFSTest, NegativeElementsInInputList) {
-    std::vector<int> elements = {-1, 3, 5}; // List containing negative elements
+    // List containing negative elements
+    std::vector<int> elements = {-1, 3, 5};
     int target_sum = 4;
     EXPECT_TRUE(Dfs(0, 0, elements, target_sum));
 }

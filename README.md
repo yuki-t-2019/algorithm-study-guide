@@ -27,29 +27,28 @@ The repository is organized by algorithm type.
 Each algorithm has its own directory containing the implementation and relevant examples.
 ```
 algorithm-study-guide/
-├── dfs
+├── CMakeLists.txt
+├── README.md
+├── scripts
 │   ├── build_and_run.sh
-│   ├── build_test_and_run.sh
+│   └── build_test_and_run.sh
+├── src
 │   ├── dfs.cpp
 │   ├── dfs.h
-│   ├── main.cpp
-│   ├── README.md
-│   └── test
-│       └── test_dfs.cpp
-├── LICENSE.txt
-└── README.md
-
+│   └── main.cpp
+└── test
+    └── test_dfs.cpp
 ```
 
 ## Usage
 ### Using a simple Script:
 ```
-cd [algo-directory]
+cd [algo-directory]/scripts
 ./build_and_run.sh
 ```
 ### WithTests:
 ```
-cd [algo-directory]
+cd [algo-directory]/scripts
 ./build_test_and_run.sh
 ```
 

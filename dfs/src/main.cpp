@@ -2,7 +2,7 @@
  * Copyright (c) 2024 Yuki Tsuboi
  * 
  * File: main.cpp
- * Description: Implementation of Depth First Search (DFS) algorithm to determine 
+ * Description: Depth First Search (DFS) algorithm to determine 
  *              if a given subset of integers sum to a specified value.
  * 
  * Input:
@@ -15,7 +15,7 @@
  * - "No" otherwise
  */
 
-#include "dfs.h"
+#include "src/dfs.h"
 
 /**
  * @brief Main function to execute the DFS algorithm.
@@ -27,8 +27,8 @@
  */
 int main() {
   // Prompt the user for input
-  std::cout << "Enter the number of elements (n), the target sum (k), and the elements of the list (ai):" << std::endl;
-
+  std::cout << "Enter the number of elements (n), the target sum (k), and the "
+               "elements of the list (ai):" << std::endl;
   // Prepare for input
   std::ios::sync_with_stdio(false);
   std::cin.tie(0);
