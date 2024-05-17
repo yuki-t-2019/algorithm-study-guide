@@ -36,22 +36,22 @@ int main() {
   int num_elements, target_sum;
   std::cin >> num_elements >> target_sum;
 
-  // Validate input
-  if (num_elements <= 0) {
-    std::cerr << "The number of elements must be a positive integer." << std::endl;
-    return 1;
-  }
-
   std::vector<int> elements(num_elements);
   for (int i = 0; i < num_elements; ++i) {
     std::cin >> elements[i];
   }
 
-  // Execute the DFS algorithm
-  if (Dfs(0, 0, elements, target_sum)) {
-    std::cout << "Yes" << std::endl;
-  } else {
-    std::cout << "No" << std::endl;
+  try {
+    // Execute the DFS algorithm
+    if (Dfs(0, 0, elements, target_sum)) {
+      std::cout << "Yes" << std::endl;
+    } else {
+      std::cout << "No" << std::endl;
+    }
+  } catch (const std::exception& e) {
+    // Print the error message
+    std::cerr << e.what() << std::endl;
+    return 1;
   }
 
   return 0;

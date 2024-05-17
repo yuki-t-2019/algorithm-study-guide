@@ -13,18 +13,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Include FetchContent module
 include(FetchContent)
 
-# Fetch GoogleTest
-FetchContent_Declare(
-  googletest
-  # Specify the commit you depend on and update it regularly.
-  URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
-)
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+# Option to enable or disable testing
+option(ENABLE_TESTING "Enable testing" ON)
 
-# Enable testing
-enable_testing()
+if (ENABLE_TESTING)
+    # Fetch GoogleTest
+    FetchContent_Declare(
+      googletest
+      # Specify the commit you depend on and update it regularly.
+      URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
+    )
+    # For Windows: Prevent overriding the parent project's compiler/linker settings
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+
+    # Enable testing
+    enable_testing()
+endif()
 
 # Add the main executable
 add_executable(program main.cpp dfs.cpp)
@@ -37,11 +42,13 @@ set_target_properties(program PROPERTIES
 # Include the directory for header files
 include_directories(${CMAKE_SOURCE_DIR})
 
-# Add the test executable
-add_executable(tests test/test_dfs.cpp dfs.cpp)
+if (ENABLE_TESTING)
+    # Add the test executable
+    add_executable(tests test/test_dfs.cpp dfs.cpp)
 
-# Link test executable with GoogleTest
-target_link_libraries(tests gtest_main)
+    # Link test executable with GoogleTest
+    target_link_libraries(tests gtest_main)
 
-# Add tests
-add_test(NAME tests COMMAND tests)
+    # Add tests
+    add_test(NAME tests COMMAND tests)
+endif()

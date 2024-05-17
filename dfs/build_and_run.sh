@@ -16,16 +16,12 @@ mkdir -p build || display_error "Failed to create build directory."
 # Change to build directory
 cd build || display_error "Failed to change to build directory."
 
-# Run CMake to generate build files with tests
-cmake -DENABLE_TESTING=ON .. || display_error "Failed to run CMake."
+# Run CMake to generate build files without tests
+cmake -DENABLE_TESTING=OFF .. || display_error "Failed to run CMake."
 
 # Build the project
 echo
 cmake --build . || display_error "Failed to build the project."
-
-# Run the tests
-echo
-./tests || display_error "Tests failed."
 
 # Run the program
 echo

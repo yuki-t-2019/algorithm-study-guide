@@ -28,8 +28,8 @@ Each algorithm has its own directory containing the implementation and relevant 
 ```
 algorithm-study-guide/
 ├── dfs
+│   ├── build_and_run.sh
 │   ├── build_test_and_run.sh
-│   ├── CMakeLists.txt
 │   ├── dfs.cpp
 │   ├── dfs.h
 │   ├── main.cpp
@@ -42,12 +42,16 @@ algorithm-study-guide/
 ```
 
 ## Usage
-Using a simple Script:
+### Using a simple Script:
+```
+cd [algo-directory]
+./build_and_run.sh
+```
+### WithTests:
 ```
 cd [algo-directory]
 ./build_test_and_run.sh
 ```
-
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.txt file for details.
