@@ -1,0 +1,35 @@
+name: DFS CI
+
+on:
+  push:
+    paths:
+      - 'dfs/**'
+  pull_request:
+    paths:
+      - 'dfs/**'
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        algorithm: [dfs, bfs, other_algorithm]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: cmake -B build -DENABLE_TESTING=ON
+      working-directory: ${{ matrix.algorithm }}
+
+    - name: Build
+      run: cmake --build build
+      working-directory: ${{ matrix.algorithm }}
+
+    - name: Run tests
+      run: ctest -C Release --output-on-failure
+      working-directory: ${{ matrix.algorithm }}/build
