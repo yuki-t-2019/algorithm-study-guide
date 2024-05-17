@@ -32,7 +32,8 @@ if (ENABLE_TESTING)
 endif()
 
 # Add the main executable
-add_executable(program main.cpp dfs.cpp)
+file(GLOB SOURCES src/*.cpp)
+add_executable(program ${SOURCES})
 
 # Set the output directory for the executable
 set_target_properties(program PROPERTIES
@@ -44,7 +45,8 @@ include_directories(${CMAKE_SOURCE_DIR})
 
 if (ENABLE_TESTING)
     # Add the test executable
-    add_executable(tests test/test_dfs.cpp dfs.cpp)
+    file(GLOB TEST_SOURCES test/*.cpp)
+    add_executable(tests ${TEST_SOURCES} src/dfs.cpp)
 
     # Link test executable with GoogleTest
     target_link_libraries(tests gtest_main)

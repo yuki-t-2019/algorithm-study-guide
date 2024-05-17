@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2024 Yuki Tsuboi
+ * 
+ * File: dfs.h
+ */
+
 #ifndef DFS_H
 #define DFS_H
 
