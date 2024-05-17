@@ -1,4 +1,9 @@
 name: DFS CI
+
+env:
+  BUILD_TYPE: Release
+  ALGORITHM: dfs
+
 on:
   push:
     paths:
@@ -6,10 +11,6 @@ on:
   pull_request:
     paths:
       - '${{ env.ALGORITHM }}/**'
-
-env:
-  BUILD_TYPE: Release
-  ALGORITHM: dfs
 
 jobs:
   build:
