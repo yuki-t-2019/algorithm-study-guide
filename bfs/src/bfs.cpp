@@ -59,8 +59,7 @@ void inputValidation(
       "Maze size is out of the allowed range: 1 <= N, M <= 100");
   }
 
-  // Call the function to find the start and goal positions
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  
   if (startX == -1 || startY == -1) {
     throw std::runtime_error("Start position not found!");
   }
@@ -77,9 +76,13 @@ void inputValidation(
  */
 int Bfs(
   const int& N, const int& M, const char maze[MAX_N][MAX_M + 1]) {
-  // Input constraints validation
-  int startX, startY, goalX, goalY;
+  
   try {
+    // Call the function to find the start and goal positions
+    int startX, startY, goalX, goalY;
+    findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+
+    // Input constraints validation
     inputValidation(N, M, maze, startX, startY, goalX, goalY);
     // Debug: Print the start and goal positions
     std::cout << "Start Position: (" << startX << ", " << startY << ")" << std::endl;
