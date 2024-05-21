@@ -5,7 +5,6 @@
  */
 
 #include <gtest/gtest.h>
-#include <cstring>
 #include "src/bfs.h"
 
 class BfsTest : public ::testing::Test {
@@ -88,6 +87,16 @@ TEST_F(BfsTest, GoalPositionNotFound) {
   strcpy(maze[9], "++++#+++##");  // Goal position removed
   findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
   EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::runtime_error);
+}
+
+TEST_F(BfsTest, ShortestPathExists) {
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  ASSERT_NO_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY));
+
+  // Execute BFS algorithm
+  int result = Bfs(N, M, maze);
+
+  EXPECT_EQ(result, 22);
 }
 
 int main(int argc, char **argv) {

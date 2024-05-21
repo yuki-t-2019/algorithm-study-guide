@@ -5,7 +5,6 @@
  */
 
 #include "src/bfs.h"
-#include "bfs.h"
 
 /**
  * @brief Finds the start (S) and goal (G) positions in the maze.
@@ -73,6 +72,27 @@ void inputValidation(
  * @param 
  * @return 
  */
+int rtnMinimumTurns(
+  const int& N, const int& M, const char maze[MAX_N][MAX_M + 1],
+  int& startX, int& startY, int& goalX, int& goalY){
+  // minimum number of turns
+  int turns[MAX_N][MAX_M + 1];
+
+  // direction vector
+  int dx[4] = {1, 0, -1, 0};
+  int dy[4] = {0, 1, 0, -1};
+
+  // search minimum distance to goal from start
+  std::queue<P> que;
+
+  return -1;
+}
+
+/**
+ * @brief 
+ * @param 
+ * @return 
+ */
 int Bfs(
   const int& N, const int& M, const char maze[MAX_N][MAX_M + 1]) {
   
@@ -83,9 +103,8 @@ int Bfs(
 
     // Input constraints validation
     inputValidation(N, M, maze, startX, startY, goalX, goalY);
-    // Debug: Print the start and goal positions
-    std::cout << "Start Position: (" << startX << ", " << startY << ")" << std::endl;
-    std::cout << "Goal Position: (" << goalX << ", " << goalY << ")" << std::endl;
+
+    return rtnMinimumTurns(N, M, maze, startX, startY, goalX, goalY);
 
   } catch (const std::exception& e) {
     // Print the error message

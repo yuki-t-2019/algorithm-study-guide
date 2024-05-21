@@ -9,6 +9,12 @@
 
 #include <iostream>
 #include <cstring>
+#include <queue>
+#include <vector>
+#include <stdexcept>
+#include <utility>
+
+typedef std::pair<int, int> P;
 
 // Constants for input constraints
 const int MAX_N = 100;

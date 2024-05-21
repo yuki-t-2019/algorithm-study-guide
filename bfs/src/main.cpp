@@ -39,17 +39,8 @@ int main() {
         std::cin >> maze[i];
     }
 
-  // minimum number of turns
-  // int d[]
-
-  // Debug: Print the maze to verify input
-  // std::cout << "Maze:" << std::endl;
-  // for (int i = 0; i < N; ++i) {
-  //     std::cout << maze[i] << std::endl;
-  // }
-
   int res = Bfs(N, M, maze);
-  //  std::cout << res << std::endl;
+  std::cout << res << std::endl;
 
   return 0;
 }
