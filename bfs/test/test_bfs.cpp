@@ -11,7 +11,7 @@ class BfsTest : public ::testing::Test {
  protected:
   int N;
   int M;
-  char maze[MAX_N][MAX_M + 1];
+  char maze[MAX_N +1][MAX_M + 1];
   int startX, startY, goalX, goalY;
 
   void SetUp() override {

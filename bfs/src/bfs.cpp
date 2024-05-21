@@ -18,16 +18,16 @@
  * @param goalY Reference to the y-coordinate of the goal position.
  */
 void findStartAndGoal(
-  const int& N, const int& M, const char maze[MAX_N][MAX_M + 1],
+  const int& N, const int& M, const char maze[MAX_N + 1][MAX_M + 1],
   int &startX, int &startY, int &goalX, int &goalY) {
   startX = startY = goalX = goalY = -1; // Initialize with invalid positions
 
   for (int y = 0; y < N; ++y) {
     for (int x = 0; x < M; ++x) {
-      if (maze[y][x] == 'S') {
+      if (maze[x][y] == 'S') {
         startX = x;
         startY = y;
-      } else if (maze[y][x] == 'G') {
+      } else if (maze[x][y] == 'G') {
         goalX = x;
         goalY = y;
       }
@@ -49,7 +49,7 @@ void findStartAndGoal(
  * @throws std::runtime_error if the start or goal positions are not found.
  */
 void inputValidation(
-  const int& N, const int& M, const char maze[MAX_N][MAX_M + 1],
+  const int& N, const int& M, const char maze[MAX_N + 1][MAX_M + 1],
   int& startX, int& startY, int& goalX, int& goalY){
 
   // Validates the size of the maze.
@@ -73,7 +73,7 @@ void inputValidation(
  * @return 
  */
 int rtnMinimumTurns(
-  const int& N, const int& M, const char maze[MAX_N][MAX_M + 1],
+  const int& N, const int& M, const char maze[MAX_N + 1][MAX_M + 1],
   int& startX, int& startY, int& goalX, int& goalY){
   // minimum number of turns
   int turns[MAX_N][MAX_M + 1];
@@ -85,8 +85,40 @@ int rtnMinimumTurns(
   // search minimum distance to goal from start
   std::queue<P> que;
 
-  return -1;
+  // initialization
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++) {
+      turns[i][j] = INF;
+    }
+  }
+  que.push(P(startX, startY));
+  turns[startX][startY] = 0;
+
+  while (!que.empty()) {
+    P now = que.front(); que.pop();
+
+    // break if now status is goal
+    if (now.first == goalX && now.second == goalY) {
+      break;
+    }
+
+    // search 4 direction
+    for (int i = 0; i < 4; i++) {
+      int movedX = now.first + dx[i];
+      int movedY = now.second + dy[i];
+
+      if (0 <= movedX && movedX < N && 0 <= movedY && movedY < M) {
+        if (maze[movedX][movedY] != '#' && turns[movedX][movedY] == INF) {
+          que.push(P(movedX, movedY));
+          turns[movedX][movedY] = turns[now.first][now.second] + 1;
+        }
+      }
+    }
+  }
+
+  return turns[goalX][goalY];
 }
+
 
 /**
  * @brief 
@@ -94,7 +126,7 @@ int rtnMinimumTurns(
  * @return 
  */
 int Bfs(
-  const int& N, const int& M, const char maze[MAX_N][MAX_M + 1]) {
+  const int& N, const int& M, const char maze[MAX_N + 1][MAX_M + 1]) {
   
   try {
     // Call the function to find the start and goal positions
@@ -112,5 +144,5 @@ int Bfs(
     return -1;
   }
 
-  return 0;
+  return -1;
 }

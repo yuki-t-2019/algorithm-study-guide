@@ -35,11 +35,18 @@ int main() {
 
   char maze[MAX_N][MAX_M + 1];
   std::cout << "Enter the maze:" << std::endl;
-    for (int i = 0; i < N; ++i) {
-        std::cin >> maze[i];
-    }
+  for (int i = 0; i < N; ++i) {
+      std::cin >> maze[i];
+  }
 
-  int res = Bfs(N, M, maze);
+  char reversedMaze[MAX_N + 1][MAX_M + 1];
+  for (int y = 0; y < N; ++y) {
+    for (int x = 0; x < M; ++x) {
+      reversedMaze[y][x] = maze[x][y];
+    }
+  }
+
+  int res = Bfs(N, M, reversedMaze);
   std::cout << res << std::endl;
 
   return 0;
