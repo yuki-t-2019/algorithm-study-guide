@@ -1,90 +1,96 @@
 /*
  * Copyright (c) 2024 Yuki Tsuboi
  * 
- * File: test_dfs.cpp
+ * File: test_bfs.cpp
  */
 
 #include <gtest/gtest.h>
-#include <limits>
-#include "src/dfs.h"
+#include <cstring>
+#include "src/bfs.h"
 
-// Input constraints tests
-TEST(DFSTest, ThrowsExceptionForEmptyInputList) {
-    std::vector<int> elements;  // empty input list
-    int target_sum = 0;
-    EXPECT_THROW(Dfs(0, 0, elements, target_sum), std::invalid_argument);
+class BfsTest : public ::testing::Test {
+ protected:
+  int N;
+  int M;
+  char maze[MAX_N][MAX_M + 1];
+  int startX, startY, goalX, goalY;
+
+  void SetUp() override {
+    N = 10;
+    M = 10;
+    strcpy(maze[0], "#S######+#");
+    strcpy(maze[1], "++++++#++#");
+    strcpy(maze[2], "+#+##+##+#");
+    strcpy(maze[3], "+#++++++++");
+    strcpy(maze[4], "##+##+####");
+    strcpy(maze[5], "++++#++++#");
+    strcpy(maze[6], "+#######+#");
+    strcpy(maze[7], "++++#+++++");
+    strcpy(maze[8], "+####+###+");
+    strcpy(maze[9], "++++#+++G#");
+    startX = startY = goalX = goalY = -1;
+  }
+
+  void TearDown() override {
+    // No dynamic memory or resources to free in this test case
+    // If there were resources to release, they would be released here
+  }
+};
+
+TEST_F(BfsTest, MazeSizeWithinConstraints) {
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  ASSERT_NO_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY));
 }
 
-TEST(DFSTest, ExceedingMaxElements) {
-    std::vector<int> elements(21, 1);  // More than 20 elements
-    int target_sum = 10;
-    EXPECT_THROW(Dfs(0, 0, elements, target_sum), std::invalid_argument);
+TEST_F(BfsTest, StartPositionExists) {
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  ASSERT_NE(startX, -1);
+  ASSERT_NE(startY, -1);
 }
 
-TEST(DFSTest, NegativeElementOutOfBounds) {
-    std::vector<int> elements = {kLowerBound - 1};  // Less than -10^8
-    int target_sum = 0;
-    EXPECT_THROW(Dfs(0, 0, elements, target_sum), std::out_of_range);
+TEST_F(BfsTest, GoalPositionExists) {
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  ASSERT_NE(goalX, -1);
+  ASSERT_NE(goalY, -1);
 }
 
-TEST(DFSTest, PositiveElementOutOfBounds) {
-    std::vector<int> elements = {kUpperBound + 1};  // More than 10^8
-    int target_sum = 0;
-    EXPECT_THROW(Dfs(0, 0, elements, target_sum), std::out_of_range);
+TEST_F(BfsTest, NSizeOutOfConstraints) {
+  N = 101;  // Exceeds the constraint
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
 }
 
-TEST(DFSTest, TargetSumOutOfBoundsNegative) {
-    std::vector<int> elements = {1, 2, 3};
-    int target_sum = kLowerBound - 1;  // Less than -10^8
-    EXPECT_THROW(Dfs(0, 0, elements, target_sum), std::out_of_range);
+TEST_F(BfsTest, MSizeOutOfConstraints) {
+  M = 101;  // Exceeds the constraint
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
 }
 
-TEST(DFSTest, TargetSumOutOfBoundsPositive) {
-    std::vector<int> elements = {1, 2, 3};
-    int target_sum = kUpperBound + 1;  // More than 10^8
-    EXPECT_THROW(Dfs(0, 0, elements, target_sum), std::out_of_range);
+TEST_F(BfsTest, NSizeOutOfConstraintsNegativeOrZero) {
+  N = 0;  // N is zero
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
 }
 
-// algorithm tests
-TEST(DFSTest, SingleElementListMatchingTargetSum) {
-    std::vector<int> elements = {9};
-    int target_sum = 9;
-    EXPECT_TRUE(Dfs(0, 0, elements, target_sum));
+TEST_F(BfsTest, MSizeOutOfConstraintsNegativeOrZero) {
+  M = 0;  // M is zero
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
 }
 
-TEST(DFSTest, SingleElementListNotMatchingTargetSum) {
-    std::vector<int> elements = {5};
-    int target_sum = 9;
-    EXPECT_FALSE(Dfs(0, 0, elements, target_sum));
+TEST_F(BfsTest, StartPositionNotFound) {
+  strcpy(maze[0], "########+#");  // Start position removed
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::runtime_error);
 }
 
-TEST(DFSTest, MultipleElementListMatchingTargetSum) {
-    std::vector<int> elements = {1, 2, 3, 4, 5};
-    int target_sum = 9;
-    EXPECT_TRUE(Dfs(0, 0, elements, target_sum));
-}
-
-TEST(DFSTest, MultipleElementListNotMatchingTargetSum) {
-    std::vector<int> elements = {1, 2, 3, 4, 5};
-    int target_sum = 20;
-    EXPECT_FALSE(Dfs(0, 0, elements, target_sum));
-}
-
-TEST(DFSTest, DuplicateElementsInInputList) {
-    // List containing duplicate elements
-    std::vector<int> elements = {2, 3, 4, 2};
-    int target_sum = 6;
-    EXPECT_TRUE(Dfs(0, 0, elements, target_sum));
-}
-
-TEST(DFSTest, NegativeElementsInInputList) {
-    // List containing negative elements
-    std::vector<int> elements = {-1, 3, 5};
-    int target_sum = 4;
-    EXPECT_TRUE(Dfs(0, 0, elements, target_sum));
+TEST_F(BfsTest, GoalPositionNotFound) {
+  strcpy(maze[9], "++++#+++##");  // Goal position removed
+  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::runtime_error);
 }
 
 int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }

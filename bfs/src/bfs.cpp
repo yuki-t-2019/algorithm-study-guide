@@ -59,7 +59,6 @@ void inputValidation(
       "Maze size is out of the allowed range: 1 <= N, M <= 100");
   }
 
-  
   if (startX == -1 || startY == -1) {
     throw std::runtime_error("Start position not found!");
   }
