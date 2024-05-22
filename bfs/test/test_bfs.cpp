@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2024 Yuki Tsuboi
- * 
+ *
  * File: test_bfs.cpp
  */
 
@@ -9,25 +9,25 @@
 
 class BfsTest : public ::testing::Test {
  protected:
-  int N;
-  int M;
-  char maze[kMaxN +1][kMaxM + 1];
-  int startX, startY, goalX, goalY;
+  int n_;
+  int m_;
+  char maze_[kMaxN + 1][kMaxM + 1];
+  int start_x_, start_y_, goal_x_, goal_y_;
 
   void SetUp() override {
-    N = 10;
-    M = 10;
-    strcpy(maze[0], "#S######+#");
-    strcpy(maze[1], "++++++#++#");
-    strcpy(maze[2], "+#+##+##+#");
-    strcpy(maze[3], "+#++++++++");
-    strcpy(maze[4], "##+##+####");
-    strcpy(maze[5], "++++#++++#");
-    strcpy(maze[6], "+#######+#");
-    strcpy(maze[7], "++++#+++++");
-    strcpy(maze[8], "+####+###+");
-    strcpy(maze[9], "++++#+++G#");
-    startX = startY = goalX = goalY = -1;
+    n_ = 10;
+    m_ = 10;
+    snprintf(maze_[0], sizeof(maze_[0]), "#S######+#");
+    snprintf(maze_[1], sizeof(maze_[1]), "++++++#++#");
+    snprintf(maze_[2], sizeof(maze_[2]), "+#+##+##+#");
+    snprintf(maze_[3], sizeof(maze_[3]), "+#++++++++");
+    snprintf(maze_[4], sizeof(maze_[4]), "##+##+####");
+    snprintf(maze_[5], sizeof(maze_[5]), "++++#++++#");
+    snprintf(maze_[6], sizeof(maze_[6]), "+#######+#");
+    snprintf(maze_[7], sizeof(maze_[7]), "++++#+++++");
+    snprintf(maze_[8], sizeof(maze_[8]), "+####+###+");
+    snprintf(maze_[9], sizeof(maze_[9]), "++++#+++G#");
+    start_x_ = start_y_ = goal_x_ = -1;
   }
 
   void TearDown() override {
@@ -37,69 +37,83 @@ class BfsTest : public ::testing::Test {
 };
 
 TEST_F(BfsTest, MazeSizeWithinConstraints) {
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  ASSERT_NO_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY));
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  ASSERT_NO_THROW(
+    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_));
 }
 
 TEST_F(BfsTest, StartPositionExists) {
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  ASSERT_NE(startX, -1);
-  ASSERT_NE(startY, -1);
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  ASSERT_NE(start_x_, -1);
+  ASSERT_NE(start_y_, -1);
 }
 
 TEST_F(BfsTest, GoalPositionExists) {
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  ASSERT_NE(goalX, -1);
-  ASSERT_NE(goalY, -1);
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  ASSERT_NE(goal_x_, -1);
+  ASSERT_NE(goal_y_, -1);
 }
 
 TEST_F(BfsTest, NSizeOutOfConstraints) {
-  N = 101;  // Exceeds the constraint
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
+  n_ = 101;  // Exceeds the constraint
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  EXPECT_THROW(
+    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
+    std::invalid_argument);
 }
 
 TEST_F(BfsTest, MSizeOutOfConstraints) {
-  M = 101;  // Exceeds the constraint
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
+  m_ = 101;  // Exceeds the constraint
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  EXPECT_THROW(
+    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
+    std::invalid_argument);
 }
 
 TEST_F(BfsTest, NSizeOutOfConstraintsNegativeOrZero) {
-  N = 0;  // N is zero
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
+  n_ = 0;  // n_ is zero
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  EXPECT_THROW(
+    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
+    std::invalid_argument);
 }
 
 TEST_F(BfsTest, MSizeOutOfConstraintsNegativeOrZero) {
-  M = 0;  // M is zero
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
+  m_ = 0;  // m_ is zero
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  EXPECT_THROW(
+    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
+    std::invalid_argument);
 }
 
 TEST_F(BfsTest, StartPositionNotFound) {
-  strcpy(maze[0], "########+#");  // Start position removed
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::runtime_error);
+  snprintf(maze_[0], sizeof(maze_[0]), "########+#");  // Start position removed
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  EXPECT_THROW(
+    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
+    std::runtime_error);
 }
 
 TEST_F(BfsTest, GoalPositionNotFound) {
-  strcpy(maze[9], "++++#+++##");  // Goal position removed
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::runtime_error);
+  snprintf(maze_[9], sizeof(maze_[9]), "++++#+++##");  // Goal position removed
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  EXPECT_THROW(
+    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
+    std::runtime_error);
 }
 
 TEST_F(BfsTest, ShortestPathExists) {
-  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  ASSERT_NO_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY));
+  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
+  ASSERT_NO_THROW(
+    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_));
 
   // Execute BFS algorithm
-  int result = Bfs(N, M, maze);
+  int result = Bfs(n_, m_, maze_);
 
   EXPECT_EQ(result, 22);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
