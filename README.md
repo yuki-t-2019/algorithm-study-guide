@@ -27,17 +27,24 @@ The repository is organized by algorithm type.
 Each algorithm has its own directory containing the implementation and relevant examples.
 ```
 algorithm-study-guide/
-├── CMakeLists.txt
-├── README.md
-├── scripts
-│   ├── build_and_run.sh
-│   └── build_test_and_run.sh
-├── src
-│   ├── dfs.cpp
-│   ├── dfs.h
-│   └── main.cpp
-└── test
-    └── test_dfs.cpp
+├── bfs
+│   ├── CMakeLists.txt
+│   ├── README.md
+│   ├── scripts
+│   │   ├── build_and_run.sh
+│   │   └── build_test_and_run.sh
+│   ├── src
+│   │   ├── bfs.cpp
+│   │   ├── bfs.h
+│   │   └── main.cpp
+│   └── test
+│       └── test_bfs.cpp
+├── dfs
+│   ├── ...
+│
+├── LICENSE.txt
+└── README.md
+
 ```
 
 ## Usage
