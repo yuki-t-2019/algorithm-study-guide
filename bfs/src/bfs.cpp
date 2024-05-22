@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2024 Yuki Tsuboi
- * 
+ *
  * File: bfs.cpp
  */
 
@@ -8,28 +8,27 @@
 
 /**
  * @brief Finds the start (S) and goal (G) positions in the maze.
- * 
+ *
  * @param N Number of rows in the maze.
  * @param M Number of columns in the maze.
  * @param maze 2D character array containing the maze structure.
- * @param startX Reference to the x-coordinate of the start position.
- * @param startY Reference to the y-coordinate of the start position.
- * @param goalX Reference to the x-coordinate of the goal position.
- * @param goalY Reference to the y-coordinate of the goal position.
+ * @param start_x Reference to the x-coordinate of the start position.
+ * @param start_y Reference to the y-coordinate of the start position.
+ * @param goal_x Reference to the x-coordinate of the goal position.
+ * @param goal_y Reference to the y-coordinate of the goal position.
  */
-void findStartAndGoal(
-  const int& N, const int& M, const char maze[MAX_N + 1][MAX_M + 1],
-  int &startX, int &startY, int &goalX, int &goalY) {
-  startX = startY = goalX = goalY = -1; // Initialize with invalid positions
+void FindStartAndGoal(const int& N, const int& M, const char maze[kMaxN + 1][kMaxM + 1],
+                      int& start_x, int& start_y, int& goal_x, int& goal_y) {
+  start_x = start_y = goal_x = goal_y = -1;  // Initialize with invalid positions
 
   for (int y = 0; y < N; ++y) {
     for (int x = 0; x < M; ++x) {
       if (maze[x][y] == 'S') {
-        startX = x;
-        startY = y;
+        start_x = x;
+        start_y = y;
       } else if (maze[x][y] == 'G') {
-        goalX = x;
-        goalY = y;
+        goal_x = x;
+        goal_y = y;
       }
     }
   }
@@ -37,106 +36,108 @@ void findStartAndGoal(
 
 /**
  * @brief Validates the maze size and ensures that start and goal positions exist.
- * 
+ *
  * @param N Number of rows in the maze.
  * @param M Number of columns in the maze.
  * @param maze 2D character array containing the maze structure.
- * @param startX Reference to the x-coordinate of the start position.
- * @param startY Reference to the y-coordinate of the start position.
- * @param goalX Reference to the x-coordinate of the goal position.
- * @param goalY Reference to the y-coordinate of the goal position.
+ * @param start_x Reference to the x-coordinate of the start position.
+ * @param start_y Reference to the y-coordinate of the start position.
+ * @param goal_x Reference to the x-coordinate of the goal position.
+ * @param goal_y Reference to the y-coordinate of the goal position.
  * @throws std::invalid_argument if the maze size is out of the allowed range.
  * @throws std::runtime_error if the start or goal positions are not found.
  */
-void inputValidation(
-  const int& N, const int& M, const char maze[MAX_N + 1][MAX_M + 1],
-  int& startX, int& startY, int& goalX, int& goalY){
-
-  // Validates the size of the maze.
-  if (N <= 0 || N > MAX_N || M <= 0 || M > MAX_M) {
-    throw std::invalid_argument(
-      "Maze size is out of the allowed range: 1 <= N, M <= 100");
+void InputValidation(const int& N, const int& M, const char maze[kMaxN + 1][kMaxM + 1],
+                     int& start_x, int& start_y, int& goal_x, int& goal_y) {
+  // Validate the size of the maze.
+  if (N <= 0 || N > kMaxN || M <= 0 || M > kMaxM) {
+    throw std::invalid_argument("Maze size is out of the allowed range: 1 <= N, M <= 100");
   }
 
-  if (startX == -1 || startY == -1) {
+  if (start_x == -1 || start_y == -1) {
     throw std::runtime_error("Start position not found!");
   }
 
-  if (goalX == -1 || goalY == -1) {
+  if (goal_x == -1 || goal_y == -1) {
     throw std::runtime_error("Goal position not found!");
   }
 }
 
 /**
- * @brief 
- * @param 
- * @return 
+ * @brief Returns the minimum number of turns required to move from the start to the goal.
+ *
+ * @param N Number of rows in the maze.
+ * @param M Number of columns in the maze.
+ * @param maze 2D character array containing the maze structure.
+ * @param start_x Reference to the x-coordinate of the start position.
+ * @param start_y Reference to the y-coordinate of the start position.
+ * @param goal_x Reference to the x-coordinate of the goal position.
+ * @param goal_y Reference to the y-coordinate of the goal position.
+ * @return Minimum number of turns from start to goal.
  */
-int rtnMinimumTurns(
-  const int& N, const int& M, const char maze[MAX_N + 1][MAX_M + 1],
-  int& startX, int& startY, int& goalX, int& goalY){
-  // minimum number of turns
-  int turns[MAX_N][MAX_M + 1];
+int RtnMinimumTurns(const int& N, const int& M, const char maze[kMaxN + 1][kMaxM + 1],
+                    int& start_x, int& start_y, int& goal_x, int& goal_y) {
+  int turns[kMaxN][kMaxM + 1];
 
-  // direction vector
+  // Direction vectors
   int dx[4] = {1, 0, -1, 0};
   int dy[4] = {0, 1, 0, -1};
 
-  // search minimum distance to goal from start
-  std::queue<P> que;
-
-  // initialization
+  // Initialize turns array
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < M; j++) {
-      turns[i][j] = INF;
+      turns[i][j] = kInf;
     }
   }
-  que.push(P(startX, startY));
-  turns[startX][startY] = 0;
+
+  std::queue<P> que;
+  que.push(P(start_x, start_y));
+  turns[start_x][start_y] = 0;
 
   while (!que.empty()) {
-    P now = que.front(); que.pop();
+    P now = que.front();
+    que.pop();
 
-    // break if now status is goal
-    if (now.first == goalX && now.second == goalY) {
+    // Break if current position is the goal
+    if (now.first == goal_x && now.second == goal_y) {
       break;
     }
 
-    // search 4 direction
+    // Explore 4 directions
     for (int i = 0; i < 4; i++) {
-      int movedX = now.first + dx[i];
-      int movedY = now.second + dy[i];
+      int moved_x = now.first + dx[i];
+      int moved_y = now.second + dy[i];
 
-      if (0 <= movedX && movedX < N && 0 <= movedY && movedY < M) {
-        if (maze[movedX][movedY] != '#' && turns[movedX][movedY] == INF) {
-          que.push(P(movedX, movedY));
-          turns[movedX][movedY] = turns[now.first][now.second] + 1;
+      if (0 <= moved_x && moved_x < N && 0 <= moved_y && moved_y < M) {
+        if (maze[moved_x][moved_y] != '#' && turns[moved_x][moved_y] == kInf) {
+          que.push(P(moved_x, moved_y));
+          turns[moved_x][moved_y] = turns[now.first][now.second] + 1;
         }
       }
     }
   }
 
-  return turns[goalX][goalY];
+  return turns[goal_x][goal_y];
 }
 
-
 /**
- * @brief 
- * @param 
- * @return 
+ * @brief Executes the BFS algorithm to find the shortest path in the maze.
+ *
+ * @param N Number of rows in the maze.
+ * @param M Number of columns in the maze.
+ * @param maze 2D character array containing the maze structure.
+ * @return Minimum number of turns required to move from the start to the goal, or -1 on error.
  */
-int Bfs(
-  const int& N, const int& M, const char maze[MAX_N + 1][MAX_M + 1]) {
-  
+int Bfs(const int& N, const int& M, const char maze[kMaxN + 1][kMaxM + 1]) {
   try {
     // Call the function to find the start and goal positions
-    int startX, startY, goalX, goalY;
-    findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+    int start_x, start_y, goal_x, goal_y;
+    FindStartAndGoal(N, M, maze, start_x, start_y, goal_x, goal_y);
 
     // Input constraints validation
-    inputValidation(N, M, maze, startX, startY, goalX, goalY);
+    InputValidation(N, M, maze, start_x, start_y, goal_x, goal_y);
 
-    return rtnMinimumTurns(N, M, maze, startX, startY, goalX, goalY);
+    return RtnMinimumTurns(N, M, maze, start_x, start_y, goal_x, goal_y);
 
   } catch (const std::exception& e) {
     // Print the error message

@@ -11,7 +11,7 @@ class BfsTest : public ::testing::Test {
  protected:
   int N;
   int M;
-  char maze[MAX_N +1][MAX_M + 1];
+  char maze[kMaxN +1][kMaxM + 1];
   int startX, startY, goalX, goalY;
 
   void SetUp() override {
@@ -37,61 +37,61 @@ class BfsTest : public ::testing::Test {
 };
 
 TEST_F(BfsTest, MazeSizeWithinConstraints) {
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  ASSERT_NO_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY));
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  ASSERT_NO_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY));
 }
 
 TEST_F(BfsTest, StartPositionExists) {
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
   ASSERT_NE(startX, -1);
   ASSERT_NE(startY, -1);
 }
 
 TEST_F(BfsTest, GoalPositionExists) {
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
   ASSERT_NE(goalX, -1);
   ASSERT_NE(goalY, -1);
 }
 
 TEST_F(BfsTest, NSizeOutOfConstraints) {
   N = 101;  // Exceeds the constraint
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
 }
 
 TEST_F(BfsTest, MSizeOutOfConstraints) {
   M = 101;  // Exceeds the constraint
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
 }
 
 TEST_F(BfsTest, NSizeOutOfConstraintsNegativeOrZero) {
   N = 0;  // N is zero
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
 }
 
 TEST_F(BfsTest, MSizeOutOfConstraintsNegativeOrZero) {
   M = 0;  // M is zero
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::invalid_argument);
 }
 
 TEST_F(BfsTest, StartPositionNotFound) {
   strcpy(maze[0], "########+#");  // Start position removed
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::runtime_error);
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::runtime_error);
 }
 
 TEST_F(BfsTest, GoalPositionNotFound) {
   strcpy(maze[9], "++++#+++##");  // Goal position removed
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  EXPECT_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY), std::runtime_error);
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  EXPECT_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY), std::runtime_error);
 }
 
 TEST_F(BfsTest, ShortestPathExists) {
-  findStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
-  ASSERT_NO_THROW(inputValidation(N, M, maze, startX, startY, goalX, goalY));
+  FindStartAndGoal(N, M, maze, startX, startY, goalX, goalY);
+  ASSERT_NO_THROW(InputValidation(N, M, maze, startX, startY, goalX, goalY));
 
   // Execute BFS algorithm
   int result = Bfs(N, M, maze);

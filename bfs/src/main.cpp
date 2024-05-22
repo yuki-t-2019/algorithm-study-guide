@@ -20,9 +20,9 @@
 #include "src/bfs.h"
 
 /**
- * @brief 
- * 
- * @return int 
+ * @brief Main function to execute the BFS maze solver.
+ *
+ * @return int The exit status of the program.
  */
 int main() {
   // Prompt the user for input
@@ -33,21 +33,21 @@ int main() {
   std::cout << "Enter the size of the maze (N M):" << std::endl;
   std::cin >> N >> M;
 
-  char maze[MAX_N][MAX_M + 1];
+  char maze[kMaxN][kMaxM + 1];
   std::cout << "Enter the maze:" << std::endl;
   for (int i = 0; i < N; ++i) {
       std::cin >> maze[i];
   }
 
-  char reversedMaze[MAX_N + 1][MAX_M + 1];
+  char reversed_maze[kMaxN + 1][kMaxM + 1];
   for (int y = 0; y < N; ++y) {
     for (int x = 0; x < M; ++x) {
-      reversedMaze[y][x] = maze[x][y];
+      reversed_maze[y][x] = maze[x][y];
     }
   }
 
-  int res = Bfs(N, M, reversedMaze);
-  std::cout << res << std::endl;
+  int result = Bfs(N, M, reversed_maze);
+  std::cout << "\n" << result << std::endl;
 
   return 0;
 }
