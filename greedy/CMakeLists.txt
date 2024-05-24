@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22.1)
-project(bfs)
+project(greedy)
 
 # Guard against in-source builds
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
@@ -46,7 +46,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 if (ENABLE_TESTING)
     # Add the test executable
     file(GLOB TEST_SOURCES test/*.cpp)
-    add_executable(tests ${TEST_SOURCES} src/bfs.cpp)
+    add_executable(tests ${TEST_SOURCES} src/greedy.cpp)
 
     # Link test executable with GoogleTest
     target_link_libraries(tests gtest_main)
