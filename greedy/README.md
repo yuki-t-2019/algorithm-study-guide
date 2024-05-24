@@ -21,11 +21,12 @@ Given a set of US coins (1¢, 5¢, 10¢, 25¢, 50¢, 100¢) and their respective
 
 #### Input & Output sample
 ```
-10 10 10 10 10 10 289
+10 10 10 10 10 10
+289
 
-6
+9
 ```
-Explanation: 289¢ can be made up of 2×100¢ + 1×50¢ + 1×25¢ + 1×10¢ + 4×1¢ = 6 coins.
+Explanation: 289¢ can be made up of 2×100¢ + 1×50¢ + 1×25¢ + 1×10¢ + 4×1¢ = 9 coins.
 
 ## Author
 Yuki Tsuboi

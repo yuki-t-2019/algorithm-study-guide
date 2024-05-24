@@ -33,14 +33,33 @@ int main() {
     {1, 0}
   };
 
-  std::cout << "Enter the quantities of 1¢, 5¢, 10¢, 25¢, 50¢, and 100¢ coins:" << std::endl;
+  std::cout <<"Enter the quantities of 1¢, 5¢, 10¢, 25¢, 50¢, and 100¢ coins:"
+            << std::endl;
   for (int i = 5; i >= 0; --i) {
-      std::cin >> coins[i].quantity;
+    std::string input;
+    std::cin >> input;
+    std::istringstream iss(input);
+    int quantity;
+    if (!(iss >> quantity) || !(iss.eof())) {
+      std::cerr <<
+        "Error: Invalid input. Please enter six integers." << std::endl;
+      return -1;
+    }
+    coins[i].quantity = quantity;
   }
+
+  // Clear any additional input until the end of the line
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
   int a;
   std::cout << "Enter the target amount:" << std::endl;
-  std::cin >> a;
+  std::string input;
+  std::cin >> input;
+  std::istringstream iss(input);
+  if (!(iss >> a) || !(iss.eof())) {
+    std::cerr << "Error: Invalid input. Please enter an integer." << std::endl;
+    return -1;
+  }
 
   int result = Greedy(coins, a);
   std::cout << std::endl << result << std::endl;

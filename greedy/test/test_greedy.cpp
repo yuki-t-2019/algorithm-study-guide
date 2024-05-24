@@ -1,119 +1,65 @@
 /*
  * Copyright (c) 2024 Yuki Tsuboi
  *
- * File: test_bfs.cpp
+ * File: test_greedy.cpp
  */
 
 #include <gtest/gtest.h>
-#include "src/bfs.h"
+#include "src/greedy.h"
 
-class BfsTest : public ::testing::Test {
+class GreedyTest : public ::testing::Test {
  protected:
-  int n_;
-  int m_;
-  char maze_[kMaxN + 1][kMaxM + 1];
-  int start_x_, start_y_, goal_x_, goal_y_;
-
+  std::vector<Coin> coins;
+  int target_amount;
+  
   void SetUp() override {
-    n_ = 10;
-    m_ = 10;
-    snprintf(maze_[0], sizeof(maze_[0]), "#S######+#");
-    snprintf(maze_[1], sizeof(maze_[1]), "++++++#++#");
-    snprintf(maze_[2], sizeof(maze_[2]), "+#+##+##+#");
-    snprintf(maze_[3], sizeof(maze_[3]), "+#++++++++");
-    snprintf(maze_[4], sizeof(maze_[4]), "##+##+####");
-    snprintf(maze_[5], sizeof(maze_[5]), "++++#++++#");
-    snprintf(maze_[6], sizeof(maze_[6]), "+#######+#");
-    snprintf(maze_[7], sizeof(maze_[7]), "++++#+++++");
-    snprintf(maze_[8], sizeof(maze_[8]), "+####+###+");
-    snprintf(maze_[9], sizeof(maze_[9]), "++++#+++G#");
-    start_x_ = start_y_ = goal_x_ = -1;
+    // Initialize common resources for tests
   }
-
+  
   void TearDown() override {
-    // No dynamic memory or resources to free in this test case
-    // If there were resources to release, they would be released here
+    // Clean up common resources for tests
   }
 };
 
-TEST_F(BfsTest, MazeSizeWithinConstraints) {
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  ASSERT_NO_THROW(
-    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_));
+TEST_F(GreedyTest, BasicCase) {
+  coins = {{100, 10}, {50, 10}, {25, 10}, {10, 10}, {5, 10}, {1, 10}};
+  target_amount = 287; // 2*100 + 1*50 + 1*25 + 1*10 + 2*1 = 7 coins
+  EXPECT_EQ(Greedy(coins, target_amount), 7);
 }
 
-TEST_F(BfsTest, StartPositionExists) {
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  ASSERT_NE(start_x_, -1);
-  ASSERT_NE(start_y_, -1);
+TEST_F(GreedyTest, InsufficientCoinsCase) {
+  coins = {{100, 1}, {50, 1}, {25, 1}, {10, 1}, {5, 1}, {1, 1}};
+  target_amount = 287; // Not enough coins
+  EXPECT_EQ(Greedy(coins, target_amount), -1);
 }
 
-TEST_F(BfsTest, GoalPositionExists) {
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  ASSERT_NE(goal_x_, -1);
-  ASSERT_NE(goal_y_, -1);
+TEST_F(GreedyTest, MaximumConstraintsCase) {
+  coins = {{100, 1000000000}, {50, 1000000000}, {25, 1000000000},
+           {10, 1000000000}, {5, 1000000000}, {1, 1000000000}};
+  target_amount = 1000000000; // 10000000*100 = 10000000 coins
+  EXPECT_EQ(Greedy(coins, target_amount), 10000000);
 }
 
-TEST_F(BfsTest, NSizeOutOfConstraints) {
-  n_ = 101;  // Exceeds the constraint
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  EXPECT_THROW(
-    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
-    std::invalid_argument);
+TEST_F(GreedyTest, ZeroCoinsCase) {
+  coins = {{100, 0}, {50, 0}, {25, 0}, {10, 0}, {5, 0}, {1, 0}};
+  target_amount = 50; // Not enough coins
+  EXPECT_EQ(Greedy(coins, target_amount), -1);
 }
 
-TEST_F(BfsTest, MSizeOutOfConstraints) {
-  m_ = 101;  // Exceeds the constraint
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  EXPECT_THROW(
-    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
-    std::invalid_argument);
+TEST_F(GreedyTest, ZeroTargetAmountCase) {
+  coins = {{100, 10}, {50, 10}, {25, 10}, {10, 10}, {5, 10}, {1, 10}};
+  target_amount = 0; // No coins needed
+  EXPECT_EQ(Greedy(coins, target_amount), 0);
 }
 
-TEST_F(BfsTest, NSizeOutOfConstraintsNegativeOrZero) {
-  n_ = 0;  // n_ is zero
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  EXPECT_THROW(
-    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
-    std::invalid_argument);
+TEST_F(GreedyTest, ExceedingMaxCoinsCase) {
+  coins = {{100, 1000000001}, {50, 1000000001}, {25, 1000000001},
+           {10, 1000000001}, {5, 1000000001}, {1, 1000000001}};
+  target_amount = 1000; // Input exceeds constraints
+  EXPECT_EQ(Greedy(coins, target_amount), -1);
 }
 
-TEST_F(BfsTest, MSizeOutOfConstraintsNegativeOrZero) {
-  m_ = 0;  // m_ is zero
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  EXPECT_THROW(
-    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
-    std::invalid_argument);
-}
-
-TEST_F(BfsTest, StartPositionNotFound) {
-  snprintf(maze_[0], sizeof(maze_[0]), "########+#");  // Start position removed
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  EXPECT_THROW(
-    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
-    std::runtime_error);
-}
-
-TEST_F(BfsTest, GoalPositionNotFound) {
-  snprintf(maze_[9], sizeof(maze_[9]), "++++#+++##");  // Goal position removed
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  EXPECT_THROW(
-    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_),
-    std::runtime_error);
-}
-
-TEST_F(BfsTest, ShortestPathExists) {
-  FindStartAndGoal(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_);
-  ASSERT_NO_THROW(
-    InputValidation(n_, m_, maze_, &start_x_, &start_y_, &goal_x_, &goal_y_));
-
-  // Execute BFS algorithm
-  int result = Bfs(n_, m_, maze_);
-
-  EXPECT_EQ(result, 22);
-}
-
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
