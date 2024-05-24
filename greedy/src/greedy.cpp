@@ -25,11 +25,11 @@ void InputValidation(const std::vector<Coin>& coins, const int& a) {
 }
 
 /**
- * @brief Uses the Greedy algorithm to compute the minimum number of coins needed to reach the target amount.
+ * @brief Uses the Greedy algorithm it is not possible to reach the target amo to compute the minimum number of coins needed to reach the target amount.
  * 
  * @param coins A vector of Coin structs representing the coin denominations and their quantities.
  * @param a The target amount in cents.
- * @return The minimum number of coins needed, or -1 if it is not possible to reach the target amount.
+ * @return The minimum number of coins needed, or -1 if it is invalid input
  */
 int Greedy(const std::vector<Coin>& coins, const int& a) {
   try {

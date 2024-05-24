@@ -6,7 +6,7 @@
  *
  * Input:
  * - Six integers representing the quantities of
- *   1¢, 5¢, 10¢, 25¢, 50¢, and 100¢ coins.
+ *   1 ¢, 5 ¢, 10 ¢, 25 ¢, 50 ¢, and 100 ¢ coins.
  * - A single integer representing the target amount in cents.
  *
  * Output:
@@ -33,8 +33,9 @@ int main() {
     {1, 0}
   };
 
-  std::cout <<"Enter the quantities of 1¢, 5¢, 10¢, 25¢, 50¢, and 100¢ coins:"
-            << std::endl;
+  std::cout
+    << "Enter the quantities of 1 ¢, 5 ¢, 10 ¢, 25 ¢, 50 ¢, and 100 ¢ coins:"
+    << std::endl;
   for (int i = 5; i >= 0; --i) {
     std::string input;
     std::cin >> input;
