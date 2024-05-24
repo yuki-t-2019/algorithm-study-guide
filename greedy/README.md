@@ -1,39 +1,31 @@
-# Maze Solver using BFS
-This repository contains a C++ program that solves the maze shortest path problem using the Breadth-First Search (BFS) algorithm.
+# Coin Problem Solver using Greedy Algorithm
 
-## Breadth-First Search (BFS)
-Breadth-First Search (BFS) is a graph traversal algorithm that explores all neighbors of a node before moving on to their neighbors. It is commonly used for finding the shortest path in unweighted graphs, making it ideal for solving maze and pathfinding problems.
+This repository contains a C++ program that solves the coin problem using the Greedy algorithm.
+
+## Greedy Algorithm
+The Greedy algorithm is an algorithmic paradigm that builds up a solution piece by piece, always choosing the next piece that offers the most immediate benefit. It is particularly effective for certain optimization problems where locally optimal choices lead to a globally optimal solution.
 
 ## Problem Description
-Given a maze of size `N x M` composed of passages and walls, determine the minimum number of turns required to move from the start to the goal. You can move to adjacent cells (up, down, left, right) in one turn. It is guaranteed that there is a path from the start to the goal.
+Given a set of US coins (1¢, 5¢, 10¢, 25¢, 50¢, 100¢) and their respective quantities, determine the minimum number of coins required to make the target amount in dollars using a Greedy approach. The program should account for the limited quantity of each coin type.
 
 ### Constraints
-- `1 <= N, M <= 100`
+- `0 <= C1, C5, C10, C25, C50, C100 <= 10^9` (quantities of each coin type)
+- `0 <= A <= 10^9` (target amount in cents)
 
 ### Input
-- An integer `N`: the number of rows in the maze.
-- An integer `M`: the number of columns in the maze.
-- A `N x M` grid representing the maze, where `'#'` denotes a wall, `'+'` denotes a passage, `'S'` denotes the start, and `'G'` denotes the goal.
+- Six integers representing the quantities of 1¢, 5¢, 10¢, 25¢, 50¢, and 100¢ coins.
+- A single integer representing the target amount in cents.
 
 ### Output
-- An integer representing the minimum number of turns required to move from the start to the goal.
+- A single integer representing the minimum number of coins required to make the target amount. If it is not possible to make the target amount with the given quantities, the program should output `-1`.
 
 #### Input & Output sample
 ```
-10 10
-#S######+#
-++++++#++#
-+#+##+##+#
-+#++++++++
-##+##+####
-++++#++++#
-+#######+#
-++++#+++++
-+####+###+
-++++#+++G#
+10 10 10 10 10 10
 
-22
+289
 ```
+Explanation: 289¢ can be made up of 2×100¢ + 1×50¢ + 1×25¢ + 1×10¢ + 4×1¢ = 6 coins.
 
 ## Author
 Yuki Tsuboi
