@@ -9,9 +9,11 @@
 /**
  * @brief Validates the input quantities of coins and the target amount.
  * 
- * @param coins A vector of Coin structs representing the coin denominations and their quantities.
+ * @param coins A vector of Coin structs representing the coin denominations
+ *              and their quantities.
  * @param a The target amount in cents.
- * @throws std::invalid_argument if any coin quantity or the target amount is out of the valid range.
+ * @throws std::invalid_argument if any coin quantity
+ *         or the target amount is out of the valid range.
  */
 void InputValidation(const std::vector<Coin>& coins, const int& a) {
   if (a < 0 || a > MAX_AMOUNT) {
@@ -25,9 +27,11 @@ void InputValidation(const std::vector<Coin>& coins, const int& a) {
 }
 
 /**
- * @brief Uses the Greedy algorithm it is not possible to reach the target amo to compute the minimum number of coins needed to reach the target amount.
+ * @brief Uses the Greedy algorithm to compute the minimum number of coins
+ *        needed to reach the target amount.
  * 
- * @param coins A vector of Coin structs representing the coin denominations and their quantities.
+ * @param coins A vector of Coin structs representing the coin denominations
+ *              and their quantities.
  * @param a The target amount in cents.
  * @return The minimum number of coins needed, or -1 if it is invalid input
  */
@@ -46,7 +50,8 @@ int Greedy(const std::vector<Coin>& coins, const int& a) {
 
   for (const auto& coin : coins) {
     if (remaining_amount <= 0) break;
-    int num_coins = std::min(static_cast<long long int>(remaining_amount / coin.value), coin.quantity);
+    int num_coins = std::min(
+      static_cast<int64_t>(remaining_amount / coin.value), coin.quantity);
     remaining_amount -= num_coins * coin.value;
     total_coins += num_coins;
   }
