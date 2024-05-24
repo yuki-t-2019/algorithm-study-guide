@@ -41,6 +41,8 @@ algorithm-study-guide/
 │       └── test_bfs.cpp
 ├── dfs
 │   ├── ...
+├── greedy
+│   ├── ...
 │
 ├── LICENSE.txt
 └── README.md
