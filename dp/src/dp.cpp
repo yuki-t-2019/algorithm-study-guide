@@ -11,11 +11,14 @@
  * 
  * @param items A vector of Item structs representing the items.
  * @param W The maximum weight capacity of the knapsack.
- * @throws std::invalid_argument if any item weight or value, or the maximum weight capacity is out of the valid range.
+ * @throws std::invalid_argument if any item weight or value, the maximum weight capacity is out of the valid range, or if the items vector is empty.
  */
 void InputValidation(const std::vector<Item>& items, const int& W) {
   if (W < MIN_WEIGHT_CAPACITY || W > MAX_WEIGHT_CAPACITY) {
     throw std::invalid_argument("Maximum weight capacity is out of valid range.");
+  }
+  if (items.empty()) {
+    throw std::invalid_argument("Items list is empty.");
   }
   for (const auto& item : items) {
     if (item.weight < MIN_ITEM_WEIGHT || item.weight > MAX_ITEM_WEIGHT || item.value < MIN_ITEM_VALUE || item.value > MAX_ITEM_VALUE) {
@@ -23,7 +26,6 @@ void InputValidation(const std::vector<Item>& items, const int& W) {
     }
   }
 }
-
 
 /**
  * @brief Solves the knapsack problem using dynamic programming.
