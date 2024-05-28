@@ -24,11 +24,17 @@ Given `n` items, each with a weight `wi` and a value `vi`, determine the maximum
 ### Input & Output Sample
 #### Input
 ```
+Enter the number of items:
 4
+
+Enter the weight and value of each item:
+
 2 3
 1 2
 3 3
 2 2
+
+Enter the maximum weight capacity:
 5
 ```
 
