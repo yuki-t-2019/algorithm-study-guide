@@ -7,10 +7,12 @@
 #ifndef DP_SRC_DP_H_
 #define DP_SRC_DP_H_
 
-#include <vector>
 #include <algorithm>
 #include <iostream>
+#include <limits>
+#include <sstream>
 #include <stdexcept>
+#include <vector>
 
 constexpr int MIN_ITEM_WEIGHT = 1;
 constexpr int MAX_ITEM_WEIGHT = 100;

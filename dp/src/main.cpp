@@ -23,17 +23,37 @@ int main() {
 
   int n;
   std::cout << "Enter the number of items:" << std::endl;
-  std::cin >> n;
+  std::string input;
+  std::cin >> input;
+  std::istringstream iss(input);
+  if (!(iss >> n) || !(iss.eof())) {
+    std::cerr << "Error: Invalid input. Please enter an integer." << std::endl;
+    return -1;
+  }
 
   std::vector<Item> items(n);
-  std::cout << '\n' << "Enter the weight and value of each item:" << std::endl;
+  std::cout << '\n' << "Enter the weight and value of each item (each line should contain two integers):" << std::endl;
   for (int i = 0; i < n; ++i) {
-    std::cin >> items[i].weight >> items[i].value;
+    int weight, value;
+    if (!(std::cin >> weight >> value)) {
+      std::cerr << "Error: Invalid input. Please enter two integers." << std::endl;
+      return -1;
+    }
+    items[i].weight = weight;
+    items[i].value = value;
+
+    // Clear any additional input until the end of the line
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
 
   int W;
   std::cout << '\n' << "Enter the maximum weight capacity:" << std::endl;
-  std::cin >> W;
+  std::cin >> input;
+  std::istringstream issW(input);
+  if (!(issW >> W) || !(issW.eof())) {
+    std::cerr << "Error: Invalid input. Please enter an integer." << std::endl;
+    return -1;
+  }
 
   int result = dp(items, W);
   std::cout << std::endl << result << std::endl;
