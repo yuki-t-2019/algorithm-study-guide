@@ -28,7 +28,6 @@ Enter the number of items:
 4
 
 Enter the weight and value of each item:
-
 2 3
 1 2
 3 3

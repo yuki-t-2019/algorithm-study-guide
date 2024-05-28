@@ -10,6 +10,14 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <stdexcept>
+
+constexpr int MIN_ITEM_WEIGHT = 1;
+constexpr int MAX_ITEM_WEIGHT = 100;
+constexpr int MIN_ITEM_VALUE = 1;
+constexpr int MAX_ITEM_VALUE = 100;
+constexpr int MIN_WEIGHT_CAPACITY = 1;
+constexpr int MAX_WEIGHT_CAPACITY = 10000;
 
 struct Item {
     int weight;
