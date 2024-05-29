@@ -11,18 +11,21 @@
  * 
  * @param items A vector of Item structs representing the items.
  * @param W The maximum weight capacity of the knapsack.
- * @throws std::invalid_argument if any item weight or value, the maximum weight capacity is out of the valid range, or if the items vector is empty.
+ * @throws std::invalid_argument if any item weight or value,
+ *         the maximum weight capacity is out of the valid range,
+ *         or if the items vector is empty.
  */
 void InputValidation(const std::vector<Item>& items, const int& W) {
   if (W < MIN_WEIGHT_CAPACITY || W > MAX_WEIGHT_CAPACITY) {
-    throw std::invalid_argument("Maximum weight capacity is out of valid range.");
+    throw std::invalid_argument("Max weight capacity is out of valid range.");
   }
   if (items.empty()) {
     throw std::invalid_argument("Items list is empty.");
   }
   for (const auto& item : items) {
-    if (item.weight < MIN_ITEM_WEIGHT || item.weight > MAX_ITEM_WEIGHT || item.value < MIN_ITEM_VALUE || item.value > MAX_ITEM_VALUE) {
-      throw std::invalid_argument("Item weight or value is out of valid range.");
+    if (item.weight < MIN_ITEM_WEIGHT || item.weight > MAX_ITEM_WEIGHT
+        || item.value < MIN_ITEM_VALUE || item.value > MAX_ITEM_VALUE) {
+      throw std::invalid_argument("weight or value is out of valid range.");
     }
   }
 }
@@ -32,7 +35,8 @@ void InputValidation(const std::vector<Item>& items, const int& W) {
  * 
  * @param items A vector of Item structs representing the items.
  * @param W The maximum weight capacity of the knapsack.
- * @return The maximum value that can be obtained without exceeding the weight capacity.
+ * @return The maximum value that can be obtained
+ *         without exceeding the weight capacity.
  */
 int dp(const std::vector<Item>& items, const int& W) {
   try {
@@ -49,11 +53,14 @@ int dp(const std::vector<Item>& items, const int& W) {
 
   for (int i = n - 1; i >= 0; i--) {
     for (int j = 0; j <= W; j++) {
-      // If the weight of the item at index i is greater than the remaining capacity j:
+      // If the weight of the item at index i
+      // is greater than the remaining capacity j:
       if (j < items[i].weight) {
         dp_memo[i][j] = dp_memo[i + 1][j];
       } else {
-        dp_memo[i][j] = std::max(dp_memo[i + 1][j], dp_memo[i + 1][j - items[i].weight] + items[i].value);
+        dp_memo[i][j] = std::max(
+          dp_memo[i + 1][j],
+          dp_memo[i + 1][j - items[i].weight] + items[i].value);
       }
     }
   }
