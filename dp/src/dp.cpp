@@ -44,17 +44,12 @@ int dp(const std::vector<Item>& items, const int& W) {
 
   int n = items.size();
   std::vector<std::vector<int>> dp_memo(n + 1, std::vector<int>(W + 1, 0));
-
   // dp_memo[i][j] represents the maximum value that can be achieved
   // using the items from index i to the end, with a remaining capacity of j.
 
-  // Recurrence relation:
-  // If the weight of the item at index i is greater than the remaining capacity j:
-  // dp_memo[i][j] = dp_memo[i + 1][j]
-  // Otherwise:
-  // dp_memo[i][j] = max(dp_memo[i + 1][j], dp_memo[i + 1][j - items[i].weight] + items[i].value)
   for (int i = n - 1; i >= 0; i--) {
-    for (int j = 0; j<= W; j++) {
+    for (int j = 0; j <= W; j++) {
+      // If the weight of the item at index i is greater than the remaining capacity j:
       if (j < items[i].weight) {
         dp_memo[i][j] = dp_memo[i + 1][j];
       } else {
@@ -65,4 +60,3 @@ int dp(const std::vector<Item>& items, const int& W) {
 
   return dp_memo[0][W];
 }
-

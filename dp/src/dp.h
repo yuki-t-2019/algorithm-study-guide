@@ -23,8 +23,8 @@ constexpr int MIN_WEIGHT_CAPACITY = 1;
 constexpr int MAX_WEIGHT_CAPACITY = 10000;
 
 struct Item {
-    int weight;
-    int value;
+  int weight;
+  int value;
 };
 
 void InputValidation(const std::vector<Item>& items, const int& W);
