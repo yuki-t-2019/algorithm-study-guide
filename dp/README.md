@@ -43,5 +43,24 @@ Enter the maximum weight capacity:
 ```
 Explanation: By selecting the items with weights and values (2, 3), (1, 2), and (2, 2), the total weight is 5 and the total value is 7, which is the maximum possible value without exceeding the weight limit.
 
+### Recurrence Relation
+The dynamic programming solution is built using the following recurrence relation:
+
+- `dp_memo[i][j]` represents the maximum value that can be achieved using the items from index `i` to the end, with a remaining capacity of `j`.
+
+- If the weight of the item at index `i` is greater than the remaining capacity `j`:
+
+```
+dp_memo[i][j] = dp_memo[i + 1][j]
+```
+This means the item cannot be included in the knapsack.
+
+- Otherwise:
+```
+dp_memo[i][j] = max(dp_memo[i + 1][j], dp_memo[i + 1][j - items[i].weight] + items[i].value)
+```
+This means the maximum value is the greater of either including the item or not including the item.
+
+
 ## Author
 Yuki Tsuboi

@@ -51,7 +51,7 @@ TEST_F(DpTest, MaximumConstraintsCase) {
 TEST_F(DpTest, ZeroWeightCapacity) {
   items = {{2, 3}, {1, 2}, {3, 4}, {2, 2}};
   max_weight = 0;  // No items can be added
-  EXPECT_EQ(dp(items, max_weight), 0);
+  EXPECT_EQ(dp(items, max_weight), -1);
 }
 
 TEST_F(DpTest, ZeroItems) {

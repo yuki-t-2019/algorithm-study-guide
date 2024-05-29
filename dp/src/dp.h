@@ -8,6 +8,7 @@
 #define DP_SRC_DP_H_
 
 #include <algorithm>
+#include <cstring>
 #include <iostream>
 #include <limits>
 #include <sstream>
