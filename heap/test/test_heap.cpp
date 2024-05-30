@@ -83,14 +83,28 @@ TEST_F(HeapTest, MaxInitialFuel) {
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
-TEST_F(HeapTest, InvalidFuelStationDistance) {
+TEST_F(HeapTest, MinFuelStationDistance) {
+  // Test the validation of input where one of the fuel stations is located at the start
+  N = 1;
+  A = {MIN_DISTANCE - 1};
+  B = {10};
+  EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
+}
+
+TEST_F(HeapTest, MaxFuelStationDistance) {
   // Test the validation of input where one of the fuel stations is located beyond the destination
   A = {10, 14, 20, L};
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
-TEST_F(HeapTest, InvalidFuelStationAmount) {
+TEST_F(HeapTest, MinFuelStationAmount) {
   // Test the validation of input where one of the fuel stations provides more fuel than the maximum allowed
+  B = {10, 5, 2, MIN_FUEL_AMOUNT - 1};
+  EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
+}
+
+TEST_F(HeapTest, MaxFuelStationAmount) {
+  // Test the validation of input where one of the fuel stations provides less fuel than the minimum allowed
   B = {10, 5, 2, MAX_FUEL_AMOUNT + 1};
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
