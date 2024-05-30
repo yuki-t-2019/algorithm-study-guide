@@ -23,6 +23,9 @@ const int MAX_INITIAL_FUEL = 1000000;
 const int MIN_FUEL_AMOUNT = 1;
 const int MAX_FUEL_AMOUNT = 100;
 
+void InputValidation(const int& N, const int& L, const int& P,
+                     const std::vector<int>& A, const std::vector<int>& B);
+                     
 int heap(const int& N, const int& L, const int& P,
          const std::vector<int>& A, const std::vector<int>& B);
 
