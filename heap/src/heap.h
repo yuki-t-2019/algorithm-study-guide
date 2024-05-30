@@ -8,9 +8,11 @@
 #define HEAP_SRC_HEAP_H_
 
 #include <iostream>
-#include <sstream>
-#include <vector>
 #include <limits>
+#include <sstream>
+#include <stdexcept>
+#include <vector>
+
 
 const int MIN_FUEL_STATIONS = 1;
 const int MAX_FUEL_STATIONS = 10000;
