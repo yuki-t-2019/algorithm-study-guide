@@ -29,7 +29,9 @@ Given a truck that needs to travel a distance `L` with an initial amount of fuel
 ### Input & Output Sample
 #### Input
 ```
-4 25 10
+4
+25
+10
 10 14 20 21
 10 5 2 4
 ```
