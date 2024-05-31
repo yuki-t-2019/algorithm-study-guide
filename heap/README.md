@@ -42,17 +42,15 @@ Given a truck that needs to travel a distance `L` with an initial amount of fuel
 ```
 Explanation: The truck starts with 10 units of fuel and needs to travel 25 units of distance. By refueling at the stations at distances 10 and 20, it can reach the destination with a minimum of 2 refueling stops.
 
-### Solution Approach
+## Solution Approach
 To solve this problem, we can use a max heap to keep track of the fuel available at each station as we pass them. By always refueling with the maximum available fuel at each step, we ensure that the number of stops is minimized.
 
 ### Algorithm
-1. **Sort** the fuel stations by their distance from the start.
-2. **Initialize** a max heap to keep track of the fuel available at the stations.
-3. **Traverse** through the distance from the start to the destination:
+1. **Initialize** a max heap to keep track of the fuel available at the stations.
+2. **Traverse** through the distance from the start to the destination:
    - At each fuel station, add the available fuel to the heap.
    - When the fuel runs out, refuel from the heap (if available).
-4. **Check** if the truck can reach the destination with the available fuel and refueling stops.
-
+3. **Check** if the truck can reach the destination with the available fuel and refueling stops.
 
 ## Author
 Yuki Tsuboi

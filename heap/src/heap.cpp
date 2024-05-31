@@ -7,6 +7,105 @@
 #include "src/heap.h"
 
 /**
+ * @brief Constructs a new MaxHeap object.
+ */
+MaxHeap::MaxHeap() {}
+
+/**
+ * @brief Inserts a value into the heap.
+ * @param value The value to be inserted.
+ */
+void MaxHeap::Push(int value) {
+  heap_.push_back(value);
+  HeapifyUp(heap_.size() - 1);
+}
+
+/**
+ * @brief Retrieves the maximum value in the heap.
+ * @return The maximum value.
+ * @throws std::out_of_range If the heap is empty.
+ */
+int MaxHeap::Top() const {
+  if (heap_.empty()) {
+    throw std::out_of_range("Heap is empty");
+  }
+  return heap_[0];
+}
+
+/**
+ * @brief Removes the maximum value from the heap.
+ * @throws std::out_of_range If the heap is empty.
+ */
+void MaxHeap::Pop() {
+  if (heap_.empty()) {
+    throw std::out_of_range("Heap is empty");
+  }
+  heap_[0] = heap_.back();
+  heap_.pop_back();
+  HeapifyDown(0);
+}
+
+/**
+ * @brief Checks if the heap is empty.
+ * @return True if the heap is empty, false otherwise.
+ */
+bool MaxHeap::Empty() const {
+  return heap_.empty();
+}
+
+/**
+ * @brief Retrieves the number of elements in the heap.
+ * @return The number of elements.
+ */
+size_t MaxHeap::Size() const {
+  return heap_.size();
+}
+
+/**
+ * @brief Restores the heap property by moving the element at index up.
+ * @param index The index of the element to move up.
+ */
+void MaxHeap::HeapifyUp(int index) {
+  while (index > 0) {
+    int parent = (index - 1) / 2;
+    if (heap_[parent] < heap_[index]) {
+      std::swap(heap_[parent], heap_[index]);
+      index = parent;
+    } else {
+      break;
+    }
+  }
+}
+
+/**
+ * @brief Restores the heap property by moving the element at index down.
+ * @param index The index of the element to move down.
+ */
+void MaxHeap::HeapifyDown(int index) {
+  int size = heap_.size();
+  while (index < size) {
+    int left_child = 2 * index + 1;
+    int right_child = 2 * index + 2;
+    int largest = index;
+
+    if (left_child < size && heap_[left_child] > heap_[largest]) {
+      largest = left_child;
+    }
+
+    if (right_child < size && heap_[right_child] > heap_[largest]) {
+      largest = right_child;
+    }
+
+    if (largest != index) {
+      std::swap(heap_[index], heap_[largest]);
+      index = largest;
+    } else {
+      break;
+    }
+  }
+}
+
+/**
  * @brief Validates the input parameters for the truck fueling problem.
  *
  * This function checks if the given inputs meet the problem's constraints.
@@ -49,13 +148,48 @@ void InputValidation(const int& N, const int& L, const int& P,
 
 int heap(const int& N, const int& L, const int& P,
          const std::vector<int>& A, const std::vector<int>& B) {
+  
+  int num_of_refuel = 0;
+
   try {
     InputValidation(N, L, P, A, B);
+
+    // add goal to A, B
+    int N_buf = N;
+    std::vector<int> A_buf = A, B_buf = B;
+    A_buf[N] = L;
+    B_buf[N] = 0;
+    N_buf++;
+
+    // available fuel
+    MaxHeap heap_que;
+
+    int now_position = 0, tank = P;
+
+    for (int i = 0; i < N_buf; i++) {
+      // next distance
+      int d = A_buf[i] - now_position;
+
+      // refuel gas
+      while (tank - d < 0) {
+        if (heap_que.Empty()) {
+          return -1;
+        }
+
+        tank += heap_que.Top();
+        heap_que.Pop();
+        num_of_refuel++;
+      }
+
+      tank -= d;
+      now_position = A_buf[i];
+      heap_que.Push(B[i]);
+    }
+
   } catch (const std::invalid_argument& e) {
     std::cerr << "Error: " << e.what() << std::endl;
     return -1;
   }
 
-
-  return 0;
+  return num_of_refuel;
 }
