@@ -154,36 +154,39 @@ int heap(const int& N, const int& L, const int& P,
   try {
     InputValidation(N, L, P, A, B);
 
-    // add goal to A, B
-    int N_buf = N;
-    std::vector<int> A_buf = A, B_buf = B;
-    A_buf[N] = L;
-    B_buf[N] = 0;
-    N_buf++;
+    // Add the destination to the fuel station lists
+    std::vector<int> distances = A;
+    std::vector<int> fuel_provided = B;
+    distances.push_back(L);
+    fuel_provided.push_back(0);
 
-    // available fuel
-    MaxHeap heap_que;
+    // Initialize a max heap to track available fuel
+    MaxHeap fuel_heap;
 
-    int now_position = 0, tank = P;
+    int current_position = 0;
+    int current_fuel = P;
 
-    for (int i = 0; i < N_buf; i++) {
-      // next distance
-      int d = A_buf[i] - now_position;
+    for (size_t i = 0; i < distances.size(); i++) {
+      // Calculate the distance to the next fuel station
+      int distance_to_next = distances[i] - current_position;
 
-      // refuel gas
-      while (tank - d < 0) {
-        if (heap_que.Empty()) {
+      // Refuel if necessary
+      while (current_fuel - distance_to_next < 0) {
+        if (fuel_heap.Empty()) {
+          // Cannot reach the destination
           return -1;
         }
 
-        tank += heap_que.Top();
-        heap_que.Pop();
+        // Refuel from the max heap
+        current_fuel += fuel_heap.Top();
+        fuel_heap.Pop();
         num_of_refuel++;
       }
 
-      tank -= d;
-      now_position = A_buf[i];
-      heap_que.Push(B[i]);
+      // Update current position and fuel level
+      current_fuel -= distance_to_next;
+      current_position = distances[i];
+      fuel_heap.Push(fuel_provided[i]);
     }
 
   } catch (const std::invalid_argument& e) {
