@@ -9,11 +9,14 @@
  * - An integer `N` representing the number of fuel stations.
  * - An integer `L` representing the total distance to travel.
  * - An integer `P` representing the initial amount of fuel.
- * - A list of `N` integers `A` representing the distances of the fuel stations from the start.
- * - A list of `N` integers `B` representing the amount of fuel each station provides.
+ * - A list of `N` integers `A`
+ *   representing the distances of the fuel stations from the start.
+ * - A list of `N` integers `B`
+ *   representing the amount of fuel each station provides.
  *
  * Output:
- * - An integer representing the minimum number of refueling stops needed to reach the destination.
+ * - An integer representing the minimum number of refueling
+ *   needed to reach the destination.
  *   If the journey is not possible, it outputs `-1`.
  */
 
@@ -25,7 +28,8 @@
  * 
  * This function attempts to convert the input string to an integer using
  * a stringstream. If the conversion succeeds and there are no remaining
- * characters in the stream, the function returns true. Otherwise, it returns false.
+ * characters in the stream, the function returns true.
+ * Otherwise, it returns false.
  * 
  * @param s The input string to be checked.
  * @return true if the string represents a valid integer, false otherwise.
@@ -73,22 +77,26 @@ int main() {
 
   // Read the distances of each fuel station from the start
   std::vector<int> A(N), B(N);
-  std::cout << '\n' << "Enter the distances of each fuel station from the start:" << std::endl;
+  std::cout << '\n'
+    << "Enter the distances of each fuel station from the start:" << std::endl;
   for (int i = 0; i < N; ++i) {
     std::cin >> input;
     if (!isInteger(input)) {
-      std::cerr << "Error: Invalid input. Please enter an integer." << std::endl;
+      std::cerr
+        << "Error: Invalid input. Please enter an integer." << std::endl;
       return -1;
     }
     A[i] = std::stoi(input);
   }
 
   // Read the amount of fuel each station provides
-  std::cout << '\n' << "Enter the amount of fuel each station provides:" << std::endl;
+  std::cout << '\n'
+    << "Enter the amount of fuel each station provides:" << std::endl;
   for (int i = 0; i < N; ++i) {
     std::cin >> input;
     if (!isInteger(input)) {
-      std::cerr << "Error: Invalid input. Please enter an integer." << std::endl;
+      std::cerr
+        << "Error: Invalid input. Please enter an integer." << std::endl;
       return -1;
     }
     B[i] = std::stoi(input);

@@ -36,55 +36,64 @@ TEST_F(HeapTest, BasicCase) {
 }
 
 TEST_F(HeapTest, NoRefuelNeeded) {
-  // Test a scenario where the truck has enough initial fuel to complete the journey without refueling
+  // Test a scenario where the truck has enough initial fuel
+  // to complete the journey without refueling
   P = 30;
   EXPECT_EQ(heap(N, L, P, A, B), 0);
 }
 
 TEST_F(HeapTest, InsufficientFuel) {
-  // Test a scenario where the truck cannot complete the journey due to insufficient fuel, even after refueling
+  // Test a scenario where the truck cannot complete the journey
+  // due to insufficient fuel, even after refueling
   L = 40;
   EXPECT_EQ(heap(N, L, P, A, B), -1);
 }
 
 TEST_F(HeapTest, MinNumberOfStations) {
-  // Test the validation of input where the number of fuel stations exceeds the minimum allowed
+  // Test the validation of input where the number of fuel stations
+  // exceeds the minimum allowed
   N = MIN_FUEL_STATIONS - 1;
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
 TEST_F(HeapTest, MaxNumberOfStations) {
-  // Test the validation of input where the number of fuel stations exceeds the maximum allowed
+  // Test the validation of input where the number of fuel stations
+  // exceeds the maximum allowed
   N = MAX_FUEL_STATIONS + 1;
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
 TEST_F(HeapTest, MinDistance) {
-  // Test the validation of input where the distance to travel exceeds the minimum allowed
+  // Test the validation of input where the distance to travel
+  // exceeds the minimum allowed
   L = MIN_DISTANCE - 1;
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
 TEST_F(HeapTest, MaxDistance) {
-  // Test the validation of input where the distance to travel exceeds the maximum allowed
+  // Test the validation of input where the distance to travel
+  // exceeds the maximum allowed
   L = MAX_DISTANCE + 1;
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
 TEST_F(HeapTest, MinInitialFuel) {
-  // Test the validation of input where the initial fuel exceeds the minimum allowed
+  // Test the validation of input where the initial fuel
+  // exceeds the minimum allowed
   P = MIN_INITIAL_FUEL - 1;
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
 TEST_F(HeapTest, MaxInitialFuel) {
-  // Test the validation of input where the initial fuel exceeds the maximum allowed
+  // Test the validation of input where the initial fuel
+  // exceeds the maximum allowed
   P = MAX_INITIAL_FUEL + 1;
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
 TEST_F(HeapTest, MinFuelStationDistance) {
-  // Test the validation of input where one of the fuel stations is located at the start
+  // Test the validation of input
+  // where one of the fuel stations is located at the start
   N = 1;
   A = {MIN_DISTANCE - 1};
   B = {10};
@@ -92,19 +101,22 @@ TEST_F(HeapTest, MinFuelStationDistance) {
 }
 
 TEST_F(HeapTest, MaxFuelStationDistance) {
-  // Test the validation of input where one of the fuel stations is located beyond the destination
+  // Test the validation of input
+  // where one of the fuel stations is located beyond the destination
   A = {10, 14, 20, L};
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
 TEST_F(HeapTest, MinFuelStationAmount) {
-  // Test the validation of input where one of the fuel stations provides more fuel than the maximum allowed
+  // Test the validation of input
+  // where one of the fuel stations provides more fuel than the maximum allowed
   B = {10, 5, 2, MIN_FUEL_AMOUNT - 1};
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
 
 TEST_F(HeapTest, MaxFuelStationAmount) {
-  // Test the validation of input where one of the fuel stations provides less fuel than the minimum allowed
+  // Test the validation of input
+  // where one of the fuel stations provides less fuel than the minimum allowed
   B = {10, 5, 2, MAX_FUEL_AMOUNT + 1};
   EXPECT_THROW(InputValidation(N, L, P, A, B), std::invalid_argument);
 }
