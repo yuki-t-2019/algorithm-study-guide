@@ -46,6 +46,8 @@ algorithm-study-guide/
 │   ├── ...
 ├── greedy
 │   ├── ...
+├── heap
+│   ├── ...
 │
 ├── LICENSE.txt
 └── README.md
@@ -64,6 +66,8 @@ Dynamic Programming (DP) is an algorithmic paradigm used to solve problems by br
 ### Greedy Algorithms
 Greedy algorithms are problem-solving strategies that make the locally optimal choice at each stage with the hope of finding a global optimum. These algorithms make decisions based solely on the information available at the current step without considering future consequences.
 
+### Heap
+A heap is a specialized tree-based data structure that satisfies the heap property. In a max heap, the value of each node is greater than or equal to the values of its children. A max heap ensures that the parent node is always greater than or equal to its child nodes, making it useful for efficiently retrieving the maximum element. Heaps are commonly used to implement priority queues. They are commonly implemented using binary trees.
 
 ## Usage
 ### Using a simple Script:
