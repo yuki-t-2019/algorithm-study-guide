@@ -6,3 +6,6 @@
 
 #include "src/bst.h"
 
+void bst(const std::vector<std::pair<int, int>>& queries) {
+  
+}
