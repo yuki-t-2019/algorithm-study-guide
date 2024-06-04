@@ -3,7 +3,7 @@ This repository contains a C++ program that processes a series of queries on a s
 
 
 ## Binary Search Tree (BST)
-A Binary Search Tree (BST) is a tree data structure in which each node has at most two children, referred to as the left child and the right child. For every node, all elements in the left subtree are less than the node, and all elements in the right subtree are greater than the node. This property makes BSTs useful for operations like insertion, deletion, and searching, which can be performed in (O(log n)) time on average.
+A Binary Search Tree (BST) is a tree data structure in which each node has at most two children, referred to as the left child and the right child. For every node, all elements in the left subtree are less than the node, and all elements in the right subtree are greater than the node. This property makes BSTs useful for operations like insertion, deletion, and searching, which can be performed in **(O(log n))** time on average.
 
 
 ## Problem Description
@@ -12,8 +12,8 @@ Given a set of numbers `S`, process a series of `Q` queries of the following two
 2. **Type 2**: Find and remove the `X`-th smallest number in the set `S`.
 
 ### Constraints
-- `1 <= Q <= 200000` (number of queries)
-- `1 <= X <= 200000`
+- 1 <= Q <= 200000 (number of queries)
+- 1 <= X <= 200000
 - Before processing a Type 1 query, the number `X` is not in the set `S`.
 - Before processing a Type 2 query, the set `S` contains at least `X` numbers.
 
@@ -27,8 +27,8 @@ TQ XQ
 ```
 - An integer `Q` representing the number of queries.
 - Query lines follow, each containing:
-  - `Ti=1` for a Type 1 query.
-  - `Ti=2` for a Type 2 query.
+  - Ti=1 for a Type 1 query.
+  - Ti=2 for a Type 2 query.
 
 ### Output
 - For each Type 2 query, output the `X`-th smallest number in the set `S` and remove it from the set.
