@@ -64,7 +64,7 @@ int main() {
     }
 
     // Call the bst function with the collected queries
-    bst(queries);
+    bst(Q, queries);
 
     return 0;
 }
