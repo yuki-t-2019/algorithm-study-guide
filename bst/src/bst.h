@@ -8,6 +8,7 @@
 #define BST_SRC_BST_H_
 
 #include <iostream>
+#include <set>
 #include <sstream>
 #include <stdexcept>
 #include <string>

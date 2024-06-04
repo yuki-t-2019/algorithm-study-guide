@@ -216,6 +216,8 @@ void InputValidation(int q, const std::vector<std::pair<int, int>>& queries) {
  */
 int bst(int q, const std::vector<std::pair<int, int>>& queries) {
   std::vector<int> results;
+  std::set<int> currentSet;
+
   try {
     InputValidation(q, queries);
     
@@ -223,12 +225,23 @@ int bst(int q, const std::vector<std::pair<int, int>>& queries) {
     for (const auto& query : queries) {
       int type = query.first;
       int x = query.second;
+      
       if (type == 1) {
+        // Before processing a Type 1 query, ensure that X is not in the set S
+        if (currentSet.find(x) != currentSet.end()) {
+          throw std::invalid_argument("Value already in set for Type 1 query.");
+        }
         tree.Insert(x);
+        currentSet.insert(x);
       } else if (type == 2) {
+        // Before processing a Type 2 query, ensure that the set S contains at least X numbers
+        if (currentSet.size() < x) {
+          throw std::out_of_range("Not enough elements in set for Type 2 query.");
+        }
         int result = tree.FindKthSmallest(x);
         results.push_back(result);
         tree.DeleteKthSmallest(x);
+        currentSet.erase(result);
       }
     }
   } catch (const std::invalid_argument& e) {
