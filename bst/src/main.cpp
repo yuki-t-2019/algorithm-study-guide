@@ -35,36 +35,37 @@ bool isInteger(const std::string& s) {
 }
 
 int main() {
-    // Prompt the user for input
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(0);
+  // Prompt the user for input
+  std::ios::sync_with_stdio(false);
+  std::cin.tie(0);
 
-    std::string input;
-    int Q;
+  std::string input;
+  int Q;
 
-    // Read the number of queries
-    std::cout << "Enter the number of queries:" << std::endl;
-    std::cin >> input;
-    if (!isInteger(input)) {
-        std::cerr << "Error: Invalid input. Please enter an integer." << std::endl;
-        return -1;
+  // Read the number of queries
+  std::cout << "Enter the number of queries:" << std::endl;
+  std::cin >> input;
+  if (!isInteger(input)) {
+    std::cerr << "Error: Invalid input. Please enter an integer." << std::endl;
+    return -1;
+  }
+  Q = std::stoi(input);
+
+  std::vector<std::pair<int, int>> queries;
+  std::cout << '\n' << "Enter the queries:" << std::endl;
+  for (int i = 0; i < Q; ++i) {
+    int type, X;
+    std::cin >> type >> X;
+    if ((type != 1 && type != 2) || !isInteger(std::to_string(X))) {
+      std::cerr << "Error: Invalid input. Please enter valid queries."
+        << std::endl;
+      return -1;
     }
-    Q = std::stoi(input);
+    queries.push_back({type, X});
+  }
 
-    std::vector<std::pair<int, int>> queries;
-    std::cout << '\n' << "Enter the queries:" << std::endl;
-    for (int i = 0; i < Q; ++i) {
-        int type, X;
-        std::cin >> type >> X;
-        if ((type != 1 && type != 2) || !isInteger(std::to_string(X))) {
-            std::cerr << "Error: Invalid input. Please enter valid queries." << std::endl;
-            return -1;
-        }
-        queries.push_back({type, X});
-    }
+  // Call the bst function with the collected queries
+  bst(Q, queries);
 
-    // Call the bst function with the collected queries
-    bst(Q, queries);
-
-    return 0;
+  return 0;
 }

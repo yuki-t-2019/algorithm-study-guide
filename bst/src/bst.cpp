@@ -177,9 +177,10 @@ int BST::Size(BSTNode* node) {
  *
  * This function checks if the given inputs meet the problem's constraints.
  * It ensures that the number of queries and the values in each query
- * are within the specified ranges. Additionally, it verifies that for
- * Type 1 queries, the value to be inserted is not already in the set,
- * and for Type 2 queries, the set contains at least the required number of elements.
+ * are within the specified ranges.
+ * Additionally, it verifies that for Type 1 queries, the value to be inserted
+ * is not already in the set, and for Type 2 queries, the set contains at least
+ * the required number of elements.
  * If any input is invalid, the function throws an exception.
  *
  * @param q The number of queries.
@@ -225,7 +226,8 @@ void InputValidation(int q, const std::vector<std::pair<int, int>>& queries) {
  * @param queries A vector of pairs representing the queries.
  *                Each pair consists of a query type and a value.
  *                Query type 1 indicates insertion of the value.
- *                Query type 2 indicates finding and deleting the k-th smallest value.
+ *                Query type 2 indicates finding and deleting
+ *                the k-th smallest value.
  * @return 0 on success, -1 on failure (invalid input or out-of-range access).
  */
 int bst(int q, const std::vector<std::pair<int, int>>& queries) {
@@ -239,7 +241,7 @@ int bst(int q, const std::vector<std::pair<int, int>>& queries) {
     for (const auto& query : queries) {
       int type = query.first;
       int x = query.second;
-      
+
       if (type == 1) {
         tree.Insert(x);
         currentSet.insert(x);

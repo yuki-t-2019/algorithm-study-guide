@@ -44,25 +44,29 @@ TEST_F(BSTTest, FindKthSmallestWithInsufficientElements) {
 }
 
 TEST_F(BSTTest, MinNumberOfQueries) {
-  // Test the validation of input where the number of queries is less than the minimum allowed
+  // Test the validation of input where the number of queries
+  // is less than the minimum allowed
   Q = MIN_QUERY - 1;
   EXPECT_THROW(InputValidation(Q, queries), std::invalid_argument);
 }
 
 TEST_F(BSTTest, MaxNumberOfQueries) {
-  // Test the validation of input where the number of queries exceeds the maximum allowed
+  // Test the validation of input where the number of queries
+  // exceeds the maximum allowed
   Q = MAX_QUERY + 1;
   EXPECT_THROW(InputValidation(Q, queries), std::invalid_argument);
 }
 
 TEST_F(BSTTest, MinQueryValue) {
-  // Test the validation of input where the query value is less than the minimum allowed
+  // Test the validation of input where the query value
+  // is less than the minimum allowed
   queries = {{1, MIN_NUMBER - 1}};
   EXPECT_THROW(InputValidation(Q, queries), std::invalid_argument);
 }
 
 TEST_F(BSTTest, MaxQueryValue) {
-  // Test the validation of input where the query value exceeds the maximum allowed
+  // Test the validation of input where the query value
+  // exceeds the maximum allowed
   queries = {{1, MAX_NUMBER + 1}};
   EXPECT_THROW(InputValidation(Q, queries), std::invalid_argument);
 }
