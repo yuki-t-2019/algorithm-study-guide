@@ -11,6 +11,8 @@ Given a set of numbers `S`, process a series of `Q` queries of the following two
 1. **Type 1**: Add a number `X` to the set `S`.
 2. **Type 2**: Find and remove the `X`-th smallest number in the set `S`.
 
+reference:https://atcoder.jp/contests/arc033/tasks/arc033_3
+
 ### Constraints
 - 1 <= Q <= 200000 (number of queries)
 - 1 <= X <= 200000
