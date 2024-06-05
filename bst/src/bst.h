@@ -103,25 +103,15 @@ class BST {
 
 /**
  * @brief Validates the input parameters for the BST problem.
- *
- * This function checks if the given inputs meet the problem's constraints.
- * It ensures that the number of queries and the values in each query
- * are within the specified ranges. If any input is invalid, the function
- * throws an `std::invalid_argument` exception.
- *
  * @param q The number of queries.
  * @param queries A vector of pairs representing the queries.
  * @throws std::invalid_argument if any input is invalid.
+ * @throws std::out_of_range if any Type 2 query cannot be satisfied.
  */
 void InputValidation(int q, const std::vector<std::pair<int, int>>& queries);
 
 /**
  * @brief Main function to process BST operations.
- *
- * This function reads the input queries, validates them,
- * performs the corresponding BST operations,
- * and prints the results of the FindKthSmallest operations.
- *
  * @param q The number of queries.
  * @param queries A vector of pairs representing the queries.
  * @return 0 on success, -1 on failure.

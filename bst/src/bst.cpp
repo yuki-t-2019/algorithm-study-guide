@@ -177,17 +177,21 @@ int BST::Size(BSTNode* node) {
  *
  * This function checks if the given inputs meet the problem's constraints.
  * It ensures that the number of queries and the values in each query
- * are within the specified ranges. If any input is invalid, the function
- * throws an `std::invalid_argument` exception.
+ * are within the specified ranges. Additionally, it verifies that for
+ * Type 1 queries, the value to be inserted is not already in the set,
+ * and for Type 2 queries, the set contains at least the required number of elements.
+ * If any input is invalid, the function throws an exception.
  *
  * @param q The number of queries.
  * @param queries A vector of pairs representing the queries.
  * @throws std::invalid_argument if any input is invalid.
+ * @throws std::out_of_range if any Type 2 query cannot be satisfied.
  */
 void InputValidation(int q, const std::vector<std::pair<int, int>>& queries) {
   if (q < MIN_QUERY || q > MAX_QUERY) {
     throw std::invalid_argument("The number of queries (q) is out of range.");
   }
+  std::set<int> currentSet;
   for (const auto& query : queries) {
     int type = query.first;
     int x = query.second;
@@ -197,13 +201,23 @@ void InputValidation(int q, const std::vector<std::pair<int, int>>& queries) {
     if (x < MIN_NUMBER || x > MAX_NUMBER) {
       throw std::invalid_argument("Query value (x) is out of range.");
     }
+    if (type == 1) {
+      if (currentSet.find(x) != currentSet.end()) {
+        throw std::invalid_argument("Value already in set for Type 1 query.");
+      }
+      currentSet.insert(x);
+    } else if (type == 2) {
+      if (currentSet.size() < x) {
+        throw std::out_of_range("Not enough elements in set for Type 2 query.");
+      }
+    }
   }
 }
 
 /**
  * @brief Processes a series of BST operations based on input queries.
  *
- * This function reads the input queries, validates them,
+ * This function reads the input queries, validates them using InputValidation,
  * performs the corresponding BST operations (insert or find k-th smallest),
  * and prints the results of the FindKthSmallest operations.
  *
@@ -220,24 +234,16 @@ int bst(int q, const std::vector<std::pair<int, int>>& queries) {
 
   try {
     InputValidation(q, queries);
-    
+
     BST tree;
     for (const auto& query : queries) {
       int type = query.first;
       int x = query.second;
       
       if (type == 1) {
-        // Before processing a Type 1 query, ensure that X is not in the set S
-        if (currentSet.find(x) != currentSet.end()) {
-          throw std::invalid_argument("Value already in set for Type 1 query.");
-        }
         tree.Insert(x);
         currentSet.insert(x);
       } else if (type == 2) {
-        // Before processing a Type 2 query, ensure that the set S contains at least X numbers
-        if (currentSet.size() < x) {
-          throw std::out_of_range("Not enough elements in set for Type 2 query.");
-        }
         int result = tree.FindKthSmallest(x);
         results.push_back(result);
         tree.DeleteKthSmallest(x);
