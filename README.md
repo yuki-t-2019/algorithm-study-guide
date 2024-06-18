@@ -50,6 +50,8 @@ algorithm-study-guide/
 │   ├── ...
 ├── heap
 │   ├── ...
+├── uft
+│   ├── ...
 │
 ├── LICENSE.txt
 └── README.md
@@ -73,6 +75,9 @@ Greedy algorithms are problem-solving strategies that make the locally optimal c
 
 ### Heap
 A heap is a specialized tree-based data structure that satisfies the heap property. In a max heap, the value of each node is greater than or equal to the values of its children. A max heap ensures that the parent node is always greater than or equal to its child nodes, making it useful for efficiently retrieving the maximum element. Heaps are commonly used to implement priority queues. They are commonly implemented using binary trees.
+
+### Union-Find (Disjoint Set Union, UFT)
+Union-Find (also known as Disjoint Set Union or UFT) is a data structure that efficiently supports union and find operations on disjoint sets. It is useful for problems involving dynamic connectivity, such as determining connected components in graphs or managing equivalence relations. The structure maintains a collection of disjoint sets and supports operations to unite two sets and find the representative element of a set. Path compression and union by rank/heuristic are commonly used techniques to optimize these operations.
 
 **Note:**
 While these algorithms are implemented for educational purposes, many of them are available in standard libraries of various programming languages. For practical applications, it is recommended to use these libraries for optimized and well-tested implementations.
