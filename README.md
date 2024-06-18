@@ -40,6 +40,8 @@ algorithm-study-guide/
 │   │   └── main.cpp
 │   └── test
 │       └── test_bfs.cpp
+├── bst
+│   ├── ...
 ├── dfs
 │   ├── ...
 ├── dp
@@ -56,6 +58,9 @@ algorithm-study-guide/
 ## Algorithms
 ### Breadth-First Search (BFS)
 Breadth-First Search (BFS) is a graph traversal algorithm that explores vertices in the order of their distance from the source vertex. It starts at the source vertex and explores all of its neighbors before moving to the next level of vertices.
+
+### Binary Search Tree (BST)
+A Binary Search Tree (BST) is a node-based binary tree data structure where each node has at most two children referred to as the left child and the right child. For each node, the left subtree contains only nodes with keys less than the node's key, and the right subtree contains only nodes with keys greater than the node's key. BSTs allow efficient insertion, deletion, and lookup operations.
 
 ### Depth-First Search (DFS)
 Depth-First Search (DFS) is a graph traversal algorithm that explores as far as possible along each branch before backtracking. It traverses deep into the graph structure before exploring neighboring vertices.
