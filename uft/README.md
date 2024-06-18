@@ -1,10 +1,12 @@
 # Union-Find Tree (Disjoint Set)
 This repository contains a C++ program that utilizes Union-Find (Disjoint Set) data structure to manage a set of animals categorized into three types.
 
+
 ## Union-Find Tree (Disjoint Set)
 Union-Find (Disjoint Set) is a data structure that efficiently manages a collection of disjoint sets. It supports two main operations:
 - **Find**: Determine which subset a particular element is in.
 - **Union**: Merge two subsets into a single subset.
+
 
 ## Problem Description
 There are N animals numbered from 1 to N, each belonging to one of three types: A, B, or C. Type relationships are as follows:
@@ -54,13 +56,21 @@ An integer representing the number of valid pieces of information that can be pr
 ```
 Explanation: Out of the 7 pieces of information, 3 are valid and can be processed correctly.
 
+
 ## Solution Approach
-To solve this problem efficiently using Union-Find:
-1. **Initialize** a Union-Find structure with N elements, one for each animal.
-2. **Process** each information piece:
-   - For Type 1 (`1 x y`), union the sets containing animals x and y.
-   - For Type 2 (`2 x y`), check if animals x and y are in different sets to avoid creating a cycle.
-3. **Count** and output the number of valid information pieces processed.
+To efficiently solve the problem using Union-Find:
+
+1. **Initialize** a Union-Find structure with 3*N elements:
+   - Each animal i is represented by three elements: i-A, i-B, and i-C, to handle three types of relationships.
+   
+2. **Process** each query:
+   - For Type 1 (`1 x y`): Ensure animals x and y are of the same type (A, B, or C) before uniting their respective sets.
+   - For Type 2 (`2 x y`): Ensure animals x and y are of different types based on predefined eating relationships (A eats B, B eats C, C eats A) before uniting their respective sets.
+
+3. **Count** and output the number of valid queries processed, which do not violate the animal type constraints.
+
+By structuring the Union-Find with three elements per animal and handling each type of query appropriately, the solution efficiently manages and validates relationships between animals based on their types and eating habits.
+
 
 ## Author
 Your Name
