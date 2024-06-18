@@ -2,11 +2,16 @@
  * Copyright (c) 2024 Yuki Tsuboi
  *
  * File: main.cpp
- * Description: 
+ * Description: Main file for handling user input and calling the UFT function.
  *
  * Input:
+ * - The first line contains two integers, N and k.
+ * - The next k lines each contain a query in the form of three integers: type, x, and y.
+ *   - type is either 1 or 2.
+ *   - x and y are the elements involved in the query.
  *
  * Output:
+ * - The number of invalid queries based on the given constraints and logic.
  */
 
 #include "src/uft.h"

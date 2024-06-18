@@ -23,30 +23,30 @@ constexpr int MAX_K = 100000;
  * @brief Represents a Union-Find data structure with path compression and union by rank.
  */
 class UnionFind {
-public:
-    /**
-     * @brief Constructs a UnionFind object with a given number of elements.
-     * @param n The number of elements in the Union-Find structure.
-     */
-    UnionFind(int n);
+ public:
+  /**
+   * @brief Constructs a UnionFind object with a given number of elements.
+   * @param n The number of elements in the Union-Find structure.
+   */
+  explicit UnionFind(int n);
 
-    /**
-     * @brief Finds the root of the set containing element x with path compression.
-     * @param x The element whose root needs to be found.
-     * @return The root of the set containing x.
-     */
-    int Find(int x);
+  /**
+   * @brief Finds the root of the set containing element x with path compression.
+   * @param x The element whose root needs to be found.
+   * @return The root of the set containing x.
+   */
+  int Find(int x);
 
-    /**
-     * @brief Unites the sets containing elements x and y using union by rank.
-     * @param x The first element.
-     * @param y The second element.
-     */
-    void Union(int x, int y);
+  /**
+   * @brief Unites the sets containing elements x and y using union by rank.
+   * @param x The first element.
+   * @param y The second element.
+   */
+  void Union(int x, int y);
 
-private:
-    std::vector<int> parent_;
-    std::vector<int> rank_;
+ private:
+  std::vector<int> parent_;
+  std::vector<int> rank_;
 };
 
 /**
@@ -62,7 +62,7 @@ bool InputValidation(int N, int k);
  * @param N Number of elements.
  * @param k Number of queries.
  * @param queries A vector of queries.
- * @return 0 on success, -1 on failure.
+ * @return The number of invalid queries.
  */
 int uft(int N, int k, const std::vector<std::tuple<int, int, int>>& queries);
 
