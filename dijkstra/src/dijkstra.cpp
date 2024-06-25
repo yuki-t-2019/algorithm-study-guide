@@ -30,16 +30,15 @@ bool InputValidation(int N, int R) {
  *              u and v are the endpoints of a road, and w is the weight (length) of the road.
  * @return The length of the second shortest path from intersection 1 to intersection N. If no such path exists, returns -1.
  */
-int dijkstra(int N, int R,
-             const std::vector<std::tuple<int, int, int>>& roads){
-    if (!InputValidation(N, R)) {
+int dijkstra(int N, int R, const std::vector<std::tuple<int, int, int>>& roads) {
+  if (!InputValidation(N, R)) {
     std::cerr << "Error: Input constraints violated. N must be in range ["
               << MIN_N << ", " << MAX_N << "], "
               << "and R must be in range ["
               << MIN_R << ", " << MAX_R << "]." << std::endl;
     return -1;
   }
-  
+
   // Create the adjacency list
   std::vector<std::vector<std::pair<int, int>>> graph(N + 1);
   for (const auto& road : roads) {

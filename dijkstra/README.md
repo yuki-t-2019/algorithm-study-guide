@@ -10,8 +10,8 @@ Dijkstra's algorithm is a graph search algorithm that solves the single-source s
 Given a city with N intersections and R bidirectional roads, the task is to find the length of the **second shortest path** from the first intersection to the N-th intersection. The second shortest path is defined as the shortest path that is strictly longer than the shortest path.
 
 ### Constraints
-- 1 <= N <= 5000
-- 1 <= R <= 100000
+- 3 <= N <= 5000
+- 3 <= R <= 100000
 
 ### Input
 ```

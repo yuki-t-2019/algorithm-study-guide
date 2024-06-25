@@ -14,9 +14,9 @@
 #include <tuple>
 #include <vector>
 
-constexpr int MIN_N = 1;
+constexpr int MIN_N = 3;
 constexpr int MAX_N = 5000;
-constexpr int MIN_R = 1;
+constexpr int MIN_R = 3;
 constexpr int MAX_R = 100000;
 constexpr int INF = std::numeric_limits<int>::max();
 
