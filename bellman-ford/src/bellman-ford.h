@@ -7,4 +7,8 @@
 #ifndef BELLMAN_FORD_SRC_DBELLMAN_FORD_H_
 #define BELLMAN_FORD_SRC_DBELLMAN_FORD_H_
 
+#include <iostream>
+#include <vector>
+#include <tuple>
+
 #endif  // BELLMAN_FORD_SRC_DBELLMAN_FORD_H_
