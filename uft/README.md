@@ -73,4 +73,4 @@ By structuring the Union-Find with three elements per animal and handling each t
 
 
 ## Author
-Your Name
+Yuki Tsuboi
