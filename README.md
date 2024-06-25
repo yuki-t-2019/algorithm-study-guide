@@ -44,6 +44,8 @@ algorithm-study-guide/
 │   ├── ...
 ├── dfs
 │   ├── ...
+├── dijkstra
+│   ├── ...
 ├── dp
 │   ├── ...
 ├── greedy
@@ -66,6 +68,9 @@ A Binary Search Tree (BST) is a node-based binary tree data structure where each
 
 ### Depth-First Search (DFS)
 Depth-First Search (DFS) is a graph traversal algorithm that explores as far as possible along each branch before backtracking. It traverses deep into the graph structure before exploring neighboring vertices.
+
+### Dijkstra's Algorithm
+Dijkstra's Algorithm is a graph search algorithm that solves the single-source shortest path problem for a graph with non-negative edge weights. It finds the shortest path from a starting vertex to all other vertices in the graph. The algorithm maintains a set of unvisited vertices and calculates tentative distances to each vertex, updating them as shorter paths are found. Once the shortest path to a vertex is determined, it is marked as visited and the process continues until all vertices are visited. The algorithm uses a priority queue to efficiently select the next vertex with the smallest tentative distance.
 
 ### Dynamic Programming (DP)
 Dynamic Programming (DP) is an algorithmic paradigm used to solve problems by breaking them down into simpler subproblems and storing their solutions. It optimizes recursive problems with overlapping subproblems.
