@@ -19,7 +19,7 @@
  *
  * Output:
  * - The maximum distance between cow 1 and cow N that satisfies all constraints.
- *   If no valid arrangement exists, output -1.
+ *   If no such arrangement is possible, output -1.
  *   If cows can be infinitely far apart, output -2.
  */
 
@@ -40,7 +40,7 @@ int main() {
   }
 
   // Read good relations (within a certain maximum distance)
-  std::cout << "Enter good relations (AL BL DL):" << std::endl;
+  std::cout << "Enter good relations (AL BL DL), and bad relations (AD BD DD):" << std::endl;
   for (int i = 0; i < ML; ++i) {
     int AL, BL, DL;
     if (!(std::cin >> AL >> BL >> DL)) {
@@ -51,7 +51,6 @@ int main() {
   }
 
   // Read bad relations (at least a certain minimum distance apart)
-  std::cout << "Enter bad relations (AD BD DD):" << std::endl;
   for (int i = 0; i < MD; ++i) {
     int AD, BD, DD;
     if (!(std::cin >> AD >> BD >> DD)) {
@@ -62,8 +61,8 @@ int main() {
   }
 
   // Call Bellman-Ford algorithm function
-  // int result = bellmanFord(N, ML, MD, goodRelations, badRelations); // to be implement
-  int result = 0;
+  int result = bellmanFord(N, ML, MD, goodRelations, badRelations); // to be implement
+  // int result = 0;
 
   // Output the result
   std::cout << "Maximum distance between cow 1 and cow " << N << ": " << result << std::endl;

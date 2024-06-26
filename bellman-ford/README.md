@@ -36,7 +36,7 @@ The output is a single integer representing the maximum distance between cow 1 a
 ```
 4 2 1
 1 3 10
-2 4 30
+2 4 20
 2 3 3
 ```
 
