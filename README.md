@@ -28,18 +28,20 @@ The repository is organized by algorithm type.
 Each algorithm has its own directory containing the implementation and relevant examples.
 ```
 algorithm-study-guide/
-├── bfs
+├── bellman-ford
 │   ├── CMakeLists.txt
 │   ├── README.md
 │   ├── scripts
 │   │   ├── build_and_run.sh
 │   │   └── build_test_and_run.sh
 │   ├── src
-│   │   ├── bfs.cpp
-│   │   ├── bfs.h
+│   │   ├── bellman-ford.cpp
+│   │   ├── bellman-ford.h
 │   │   └── main.cpp
 │   └── test
-│       └── test_bfs.cpp
+│       └── test_bellman-ford.cpp
+├── bfs
+│   ├── ...
 ├── bst
 │   ├── ...
 ├── dfs
@@ -60,6 +62,9 @@ algorithm-study-guide/
 ```
 
 ## Algorithms
+### Bellman-Ford Algorithm
+The Bellman-Ford Algorithm is a graph search algorithm that computes the shortest paths from a single source vertex to all other vertices in a weighted graph. It is capable of handling graphs with negative weight edges. The algorithm works by repeatedly relaxing all edges in the graph, ensuring that the shortest path to each vertex is found. Unlike Dijkstra's Algorithm, the Bellman-Ford Algorithm can detect negative weight cycles and report their existence.
+
 ### Breadth-First Search (BFS)
 Breadth-First Search (BFS) is a graph traversal algorithm that explores vertices in the order of their distance from the source vertex. It starts at the source vertex and explores all of its neighbors before moving to the next level of vertices.
 
