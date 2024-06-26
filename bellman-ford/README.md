@@ -4,7 +4,31 @@ This repository contains a C++ program that utilizes the Bellman-Ford algorithm 
 
 ## Bellman-Ford Algorithm
 The Bellman-Ford algorithm is a graph search algorithm that computes shortest paths from a single source vertex to all other vertices in a weighted graph. It can handle graphs with negative edge weights and is capable of detecting negative weight cycles.
+```mermaid
+graph TD
+    A[Start]
+    B[Initialize the graph]
+    C[Initialize distances]
+    D1[Relax all edges]
+    D2[Check for negative weight cycles]
+    E1[Update distance for each edge u to v]
+    E2[Recheck each edge u to v]
+    F[Negative weight cycle detected]
+    G[No negative weight cycle]
+    H[End]
 
+    A --> B
+    B --> C
+    C --> D1
+    D1 --> E1
+    E1 -->|Repeat N-1 times| D1
+    D1 --> D2
+    D2 --> E2
+    E2 -->|Update occurs| F
+    E2 -->|No update occurs| G
+    F --> H
+    G --> H
+```
 
 ## Problem Description
 Given N cows, each numbered from 1 to N, some pairs of cows have constraints on their distances. The cows are arranged in a single line. These constraints are:
