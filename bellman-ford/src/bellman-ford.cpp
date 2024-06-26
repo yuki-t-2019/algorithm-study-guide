@@ -38,9 +38,78 @@ bool InputValidation(int N, int ML, int MD, const std::vector<std::tuple<int, in
   return true;
 }
 
+
 /**
- * @brief Executes the Bellman-Ford algorithm to find the maximum distance between cow 1 and cow N
- *        that satisfies all constraints.
+ * @brief Updates a variable if a smaller value is found, and sets an update flag.
+ * 
+ * @param x Variable to update.
+ * @param y New value to compare.
+ * @param updated Flag to indicate if an update was made.
+ */
+void update(int& x, int y, bool& updated) {
+  if (x > y) {
+    x = y;
+    updated = true;
+  }
+}
+
+/**
+ * @brief Executes the Bellman-Ford algorithm to update the distances.
+ * 
+ * This function updates the distances between cows using the Bellman-Ford algorithm,
+ * considering both good and bad relations.
+ * 
+ * @param N Number of cows.
+ * @param ML Number of good relations.
+ * @param MD Number of bad relations.
+ * @param goodRelations Vector of tuples representing good relations (AL, BL, DL).
+ * @param badRelations Vector of tuples representing bad relations (AD, BD, DD).
+ * @param distance Vector of distances to update.
+ * @param updated Boolean flag to indicate if any update was made.
+ */
+void bellmanFord(int N, int ML, int MD, const std::vector<std::tuple<int, int, int>>& goodRelations,
+                const std::vector<std::tuple<int, int, int>>& badRelations, 
+                std::vector<int>& distance, bool& updated) {
+  // Relax edges up to N-1 times
+  for (int i = 0; i <= N; ++i) {
+    updated = false;
+
+    for (int j = 1; j < N; j++) {
+      if (distance[j + 1] < INF) {
+        update(distance[j], distance[j + 1], updated);
+      }
+    }
+
+    // Process good relations
+    for (const auto& rel : goodRelations) {
+      int AL, BL, DL;
+      std::tie(AL, BL, DL) = rel;
+      if (distance[AL] < INF) {
+        update(distance[BL], distance[AL] + DL, updated);
+      }
+    }
+
+    // Process bad relations
+    for (const auto& rel : badRelations) {
+      int AD, BD, DD;
+      std::tie(AD, BD, DD) = rel;
+      if (distance[BD] < INF) {
+        update(distance[AD], distance[BD] - DD, updated);
+      }
+    }
+
+    // if (!updated) {
+    //   break;
+    // }
+  }
+}
+
+/**
+ * @brief Solves the problem using the Bellman-Ford algorithm.
+ * 
+ * This function computes the maximum distance between cow 1 and cow N that satisfies
+ * all given constraints. It uses the Bellman-Ford algorithm to find the shortest paths
+ * considering both good and bad relations.
  * 
  * @param N Number of cows.
  * @param ML Number of good relations.
@@ -49,61 +118,25 @@ bool InputValidation(int N, int ML, int MD, const std::vector<std::tuple<int, in
  * @param badRelations Vector of tuples representing bad relations (AD, BD, DD).
  * @return The maximum distance between cow 1 and cow N. If no valid arrangement exists, returns -1.
  */
-int bellmanFord(int N, int ML, int MD, const std::vector<std::tuple<int, int, int>>& goodRelations,
+int solve(int N, int ML, int MD, const std::vector<std::tuple<int, int, int>>& goodRelations,
                 const std::vector<std::tuple<int, int, int>>& badRelations) {
   if (!InputValidation(N, ML, MD, goodRelations, badRelations)) {
     std::cerr << "Error: Input constraints violated." << std::endl;
     return -1;
   }
 
-  // Distance array
+  bool updated = false;
+
+  // Negative cycle detected
+  std::vector<int> distanceCheck(N + 1, 0);
+  bellmanFord(N, ML, MD, goodRelations, badRelations, distanceCheck, updated);
+  if (updated) {
+    return -1;
+  }
+
   std::vector<int> distance(N + 1, INF);
   distance[1] = 0;
-
-  // Relax edges up to N-1 times
-  for (int i = 1; i < N; ++i) {
-    bool updated = false;
-
-    // Process good relations
-    for (const auto& rel : goodRelations) {
-      int AL, BL, DL;
-      std::tie(AL, BL, DL) = rel;
-      if (distance[AL] != INF && distance[AL] + DL < distance[BL]) {
-        distance[BL] = distance[AL] + DL;
-        updated = true;
-      }
-    }
-
-    // Process bad relations
-    for (const auto& rel : badRelations) {
-      int AD, BD, DD;
-      std::tie(AD, BD, DD) = rel;
-      if (distance[BD] != INF && distance[BD] - DD < distance[AD]) {
-        distance[AD] = distance[BD] - DD;
-        updated = true;
-      }
-    }
-
-    // If no update occurred, break early
-    if (!updated) break;
-  }
-
-  // Check for negative weight cycles
-  for (const auto& rel : goodRelations) {
-    int AL, BL, DL;
-    std::tie(AL, BL, DL) = rel;
-    if (distance[AL] != INF && distance[AL] + DL < distance[BL]) {
-      return -1; // Negative cycle detected
-    }
-  }
-
-  for (const auto& rel : badRelations) {
-    int AD, BD, DD;
-    std::tie(AD, BD, DD) = rel;
-    if (distance[BD] != INF && distance[BD] - DD < distance[AD]) {
-      return -1; // Negative cycle detected
-    }
-  }
+  bellmanFord(N, ML, MD, goodRelations, badRelations, distance, updated);
 
   // Return the distance from cow 1 to cow N
   return (distance[N] == INF) ? -2 : distance[N];

@@ -61,7 +61,7 @@ int main() {
   }
 
   // Call Bellman-Ford algorithm function
-  int result = bellmanFord(N, ML, MD, goodRelations, badRelations); // to be implement
+  int result = solve(N, ML, MD, goodRelations, badRelations); // to be implement
   // int result = 0;
 
   // Output the result
