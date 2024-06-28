@@ -4,6 +4,36 @@ This repository contains a C++ program that solves the maze shortest path proble
 ## Breadth-First Search (BFS)
 Breadth-First Search (BFS) is a graph traversal algorithm that explores all neighbors of a node before moving on to their neighbors. It is commonly used for finding the shortest path in unweighted graphs, making it ideal for solving maze and pathfinding problems.
 
+```mermaid
+---
+title: Breadth-First Search (BFS) Algorithm
+config:
+  theme: dark
+---
+graph TD
+    A([Start])
+    B[Initialize a queue Q]
+    C[Enqueue the starting node]
+    D[Mark the starting node as visited]
+    E{While Q<br/>is not<br/>empty}
+    F[Dequeue node u from Q]
+    G[For each unvisited neighbor v of u]
+    H[Mark v as visited]
+    I[Enqueue v into Q]
+    J([End])
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> |yes|F
+    F --> G
+    G --> H
+    H --> I
+    I --> E
+    E --> |no|J
+```
+
 ## Problem Description
 Given a maze of size `N x M` composed of passages and walls, determine the minimum number of turns required to move from the start to the goal. You can move to adjacent cells (up, down, left, right) in one turn. It is guaranteed that there is a path from the start to the goal.
 
