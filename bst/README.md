@@ -4,7 +4,38 @@ This repository contains a C++ program that processes a series of queries on a s
 
 ## Binary Search Tree (BST)
 A Binary Search Tree (BST) is a tree data structure in which each node has at most two children, referred to as the left child and the right child. For every node, all elements in the left subtree are less than the node, and all elements in the right subtree are greater than the node. This property makes BSTs useful for operations like insertion, deletion, and searching, which can be performed in **(O(log n))** time on average.
+```mermaid
+---
+title: Binary Search Tree (BST) Algorithm
+config:
+  theme: dark
+---
+graph TD
+  A[Start]
+  B[Initialize an empty BST]
+  C[Insert a node]
+  D[Search for a node]
+  E[Delete a node]
+  F{Node<br/>exists?}
+  G{Node<br/>has<br/>children?}
+  H[Replace node with child]
+  I[Find successor node]
+  J[Replace node with successor]
+  K[End]
 
+  A --> B
+  B --> C
+  C --> D
+  D --> E
+  E --> F
+  F -->|yes|G
+  F -->|no|K
+  G -->|yes|H
+  G -->|no|I
+  I --> J
+  J --> K
+  H --> K
+```
 
 ## Problem Description
 Given a set of numbers `S`, process a series of `Q` queries of the following two types:
