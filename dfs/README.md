@@ -3,6 +3,33 @@ This repository contains a C++ program that solves the subset sum problem using 
 
 ## Depth First Search (DFS)
 Depth First Search (DFS) is a graph traversal algorithm that explores as far down a branch as possible before backtracking. It is commonly used for solving problems involving searching through possible states, such as puzzle solving, pathfinding, and in this case, finding subsets of integers that sum to a specific value.
+```mermaid
+---
+title: Depth First Search (DFS) Algorithm
+config:
+  theme: dark
+---
+graph TD
+  A[Start]
+  B[Initialize stack with starting node]
+  C[Pop node from stack]
+  D[Check if node is the goal]
+  E{Goal found?}
+  F[Explore all unvisited neighbors]
+  G[Push unvisited neighbors to stack]
+  H[Mark node as visited]
+  I[End]
+
+  A --> B
+  B --> C
+  C --> D
+  D --> E
+  E -->|yes| I
+  E -->|no| H
+  H --> F
+  F --> G
+  G --> C
+```
 
 ## Problem Description
 Given a list of integers `a1, a2, ..., an`, determine if there exists a subset of these integers whose sum is exactly `k`.
