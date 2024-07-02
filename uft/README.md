@@ -6,6 +6,34 @@ This repository contains a C++ program that utilizes Union-Find (Disjoint Set) d
 Union-Find (Disjoint Set) is a data structure that efficiently manages a collection of disjoint sets. It supports two main operations:
 - **Find**: Determine which subset a particular element is in.
 - **Union**: Merge two subsets into a single subset.
+```mermaid
+---
+title: Union-Find Tree (Disjoint Set) Operations
+config:
+  theme: dark
+---
+graph TD
+  A[Start]
+  B[Initialize the disjoint set]
+  C{Operation Type?}
+  D[Find operation]
+  E[Union operation]
+  F[Find the root of the element]
+  G[Merge the subsets]
+  H{All operations<br/>processed?}
+  I[End]
+
+  A --> B
+  B --> C
+  C -->|Find| D
+  C -->|Union| E
+  D --> F
+  E --> G
+  F --> H
+  G --> H
+  H -->|no| C
+  H -->|yes| I
+```
 
 
 ## Problem Description
