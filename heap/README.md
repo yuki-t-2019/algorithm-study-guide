@@ -4,6 +4,35 @@ This repository contains a C++ program that solves a truck fueling problem using
 
 ## Heaps
 A heap is a specialized tree-based data structure that satisfies the heap property. A max heap ensures that the parent node is always greater than or equal to its child nodes, making it useful for efficiently retrieving the maximum element. A min heap, on the other hand, ensures that the parent node is always less than or equal to its child nodes. Heaps are commonly implemented using binary trees.
+```mermaid
+---
+title: Heap Operations
+config:
+  theme: dark
+---
+graph TD
+  A[Start]
+  B[Initialize an empty heap]
+  C{Heap is not empty?}
+  D[Insert an element]
+  E[Extract the root element]
+  F{Max heap<br/>or<br/>Min heap?}
+  G[Ensure heap property: Max heap]
+  H[Ensure heap property: Min heap]
+  I[End]
+
+  A --> B
+  B --> C
+  C -->|yes| E
+  C -->|no| D
+  D --> F
+  E --> F
+  F -->|Max heap| G
+  F -->|Min heap| H
+  G --> C
+  H --> C
+  C -->|no elements left| I
+```
 
 
 ## Problem Description
