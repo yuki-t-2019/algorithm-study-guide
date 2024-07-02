@@ -4,7 +4,31 @@ This repository contains a C++ program that utilizes Dijkstra's algorithm to fin
 
 ## Dijkstra's Algorithm
 Dijkstra's algorithm is a graph search algorithm that solves the single-source shortest path problem for graphs with non-negative edge weights. It works by iteratively selecting the node with the smallest known distance from the source, updating the distances to its neighbors, and repeating the process until all nodes have been processed. This ensures that the shortest path to each node is found efficiently.
+```mermaid
+---
+title: Dijkstra's Algorithm
+config:
+  theme: dark
+---
+graph TD
+  A[Start]
+  B[Initialize distances and priority queue]
+  C[Set distance of starting node to 0]
+  D{Priority queue<br/>not empty?}
+  E[Extract node with smallest distance]
+  F[Update distances to its neighbors]
+  G{All nodes<br/>processed?}
+  H[End]
 
+  A --> B
+  B --> C
+  C --> D
+  D -->|yes| E
+  E --> F
+  F --> D
+  D -->|no| G
+  G --> H
+```
 
 ## Problem Description
 Given a city with N intersections and R bidirectional roads, the task is to find the length of the **second shortest path** from the first intersection to the N-th intersection. The second shortest path is defined as the shortest path that is strictly longer than the shortest path.
