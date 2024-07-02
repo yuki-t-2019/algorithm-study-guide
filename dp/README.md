@@ -4,6 +4,33 @@ This repository contains a C++ program that solves the knapsack problem using Dy
 
 ## Dynamic Programming
 Dynamic Programming (DP) is an algorithmic paradigm that solves problems by breaking them down into simpler subproblems and solving each of these subproblems just once, storing their solutions. The next time the same subproblem occurs, instead of recomputing its solution, one simply looks up the previously computed solution, thereby saving computation time at the expense of storage space.
+```mermaid
+---
+title: Dynamic Programming (DP)
+config:
+  theme: dark
+---
+graph TD
+  A[Start]
+  B[Define the problem and identify subproblems]
+  C[Initialize storage for subproblem solutions]
+  D{Any subproblem<br/>to solve?}
+  E[Solve the subproblem]
+  F[Store the solution]
+  G[Look up the solution]
+  H[Combine solutions of subproblems to solve the main problem]
+  I[End]
+
+  A --> B
+  B --> C
+  C --> D
+  D -->|yes| E
+  E --> F
+  F --> D
+  D -->|no| G
+  G --> H
+  H --> I
+```
 
 ## Problem Description
 Given `n` items, each with a weight `wi` and a value `vi`, determine the maximum total value of items that can be included in a knapsack of capacity `W`. The goal is to maximize the sum of the values of the items in the knapsack without exceeding its weight capacity.
