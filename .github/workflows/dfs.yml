@@ -3,14 +3,14 @@ name: DFS CI
 on:
   push:
     paths:
-      - 'dfs/**'
+      - 'graph_algorithms/dfs/**'
   pull_request:
     paths:
-      - 'dfs/**'
+      - 'graph_algorithms/dfs/**'
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: dfs
+  ALGORITHM: graph_algorithms/dfs
 
 jobs:
   build:

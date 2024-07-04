@@ -3,14 +3,14 @@ name: HEAP CI
 on:
   push:
     paths:
-      - 'heap/**'
+      - 'tree_algorithms/heap/**'
   pull_request:
     paths:
-      - 'heap/**'
+      - 'tree_algorithms/heap/**'
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: heap
+  ALGORITHM: tree_algorithms/heap
 
 jobs:
   build:

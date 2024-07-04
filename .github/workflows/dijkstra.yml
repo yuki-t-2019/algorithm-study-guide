@@ -3,14 +3,14 @@ name: DIJKSTRA CI
 on:
   push:
     paths:
-      - 'dijkstra/**'
+      - 'graph_algorithms/dijkstra/**'
   pull_request:
     paths:
-      - 'dijkstra/**'
+      - 'graph_algorithms/dijkstra/**'
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: dijkstra
+  ALGORITHM: graph_algorithms/dijkstra
 
 jobs:
   build:

@@ -3,14 +3,14 @@ name: GREEDY CI
 on:
   push:
     paths:
-      - 'greedy/**'
+      - 'greedy_algorithms/greedy/**'
   pull_request:
     paths:
-      - 'greedy/**'
+      - 'greedy_algorithms/greedy/**'
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: greedy
+  ALGORITHM: greedy_algorithms/greedy
 
 jobs:
   build:
