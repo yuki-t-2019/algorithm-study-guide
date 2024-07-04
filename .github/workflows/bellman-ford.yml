@@ -10,7 +10,7 @@ on:
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: bellman-ford
+  ALGORITHM: graph_algorithms/bellman-ford
 
 jobs:
   build:
