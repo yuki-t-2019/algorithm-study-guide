@@ -3,14 +3,14 @@ name: UFT CI
 on:
   push:
     paths:
-      - 'uft/**'
+      - 'graph_algorithms/uft/**'
   pull_request:
     paths:
-      - 'uft/**'
+      - 'graph_algorithms/uft/**'
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: uft
+  ALGORITHM: graph_algorithms/uft
 
 jobs:
   build:

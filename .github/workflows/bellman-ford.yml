@@ -3,14 +3,14 @@ name: bellman-ford CI
 on:
   push:
     paths:
-      - 'bellman-ford/**'
+      - 'graph_algorithms/bellman-ford/**'
   pull_request:
     paths:
-      - 'bellman-ford/**'
+      - 'graph_algorithms/bellman-ford/**'
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: bellman-ford
+  ALGORITHM: graph_algorithms/bellman-ford
 
 jobs:
   build:

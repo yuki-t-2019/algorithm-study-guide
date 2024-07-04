@@ -3,14 +3,14 @@ name: BST CI
 on:
   push:
     paths:
-      - 'bst/**'
+      - 'tree_algorithms/bst/**'
   pull_request:
     paths:
-      - 'bst/**'
+      - 'tree_algorithms/bst/**'
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: bst
+  ALGORITHM: tree_algorithms/bst
 
 jobs:
   build:

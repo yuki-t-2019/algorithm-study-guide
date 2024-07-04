@@ -3,14 +3,14 @@ name: DP CI
 on:
   push:
     paths:
-      - 'dp/**'
+      - 'dynamic_programming/dp/**'
   pull_request:
     paths:
-      - 'dp/**'
+      - 'dynamic_programming/dp/**'
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: dp
+  ALGORITHM: dynamic_programming/dp
 
 jobs:
   build:

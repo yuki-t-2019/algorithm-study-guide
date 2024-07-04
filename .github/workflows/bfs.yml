@@ -3,14 +3,14 @@ name: BFS CI
 on:
   push:
     paths:
-      - 'bfs/**'
+      - 'graph_algorithms/bfs/**'
   pull_request:
     paths:
-      - 'bfs/**'
+      - 'graph_algorithms/bfs/**'
 
 env:
   BUILD_TYPE: Release
-  ALGORITHM: bfs
+  ALGORITHM: graph_algorithms/bfs
 
 jobs:
   build:
