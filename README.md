@@ -55,6 +55,9 @@ algorithm-study-guide/
 ├── greedy_algorithms
 │   └── greedy
 │       ├── ...
+├── number_theory
+│   └── euclidean
+│       ├── ...
 ├── tree_algorithms
 │   ├── bst
 │   │   ├── ...
@@ -96,6 +99,10 @@ Dynamic Programming (DP) is an algorithmic paradigm used to solve problems by br
 ### Greedy Algorithms
 #### Greedy Algorithms
 Greedy algorithms are problem-solving strategies that make the locally optimal choice at each stage with the hope of finding a global optimum. These algorithms make decisions based solely on the information available at the current step without considering future consequences.
+
+### number_theory
+#### Euclidean Algorithm
+The Euclidean Algorithm is a method for finding the greatest common divisor (GCD) of two integers. It is based on the principle that the GCD of two numbers also divides their difference. The algorithm involves repeatedly replacing the larger number by its remainder when divided by the smaller number, until one of the numbers becomes zero. The last non-zero number is the GCD of the original two numbers.
 
 **Note:**
 While these algorithms are implemented for educational purposes, many of them are available in standard libraries of various programming languages. For practical applications, it is recommended to use these libraries for optimized and well-tested implementations.
