@@ -26,7 +26,7 @@ graph TD
   D --> E
   E --> C
   F --> G
-  ```
+```
 
 ## Problem Description
 Given two lattice points \( P1 = (x1, y1) \) and \( P2 = (x2, y2) \) on a plane, determine how many lattice points lie on the line segment connecting these two points, excluding \( P1 \) and \( P2 \).
