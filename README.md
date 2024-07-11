@@ -56,7 +56,9 @@ algorithm-study-guide/
 │   └── greedy
 │       ├── ...
 ├── number_theory
-│   └── euclidean
+│   ├── euclidean
+│   │   ├── ...
+│   └── sieve-of-eratosthenes
 │       ├── ...
 ├── tree_algorithms
 │   ├── bst
@@ -103,6 +105,9 @@ Greedy algorithms are problem-solving strategies that make the locally optimal c
 ### number_theory
 #### Euclidean Algorithm
 The Euclidean Algorithm is a method for finding the greatest common divisor (GCD) of two integers. It is based on the principle that the GCD of two numbers also divides their difference. The algorithm involves repeatedly replacing the larger number by its remainder when divided by the smaller number, until one of the numbers becomes zero. The last non-zero number is the GCD of the original two numbers.
+
+#### Sieve of Eratosthenes
+The Sieve of Eratosthenes is an efficient algorithm for finding all prime numbers up to a given limit. It works by iteratively marking the multiples of each prime number starting from 2. This algorithm is particularly effective for generating a list of primes up to a large number, n, and is more efficient than checking each number for primality individually.
 
 **Note:**
 While these algorithms are implemented for educational purposes, many of them are available in standard libraries of various programming languages. For practical applications, it is recommended to use these libraries for optimized and well-tested implementations.
