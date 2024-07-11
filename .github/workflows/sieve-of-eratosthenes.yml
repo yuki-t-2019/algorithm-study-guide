@@ -1,4 +1,4 @@
-name: UFT CI
+name: SIEVE-OF-ERATOSTHENES CI
 
 on:
   push:

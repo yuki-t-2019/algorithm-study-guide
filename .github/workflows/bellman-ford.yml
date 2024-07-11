@@ -1,4 +1,4 @@
-name: bellman-ford CI
+name: BELLMAN-FORD CI
 
 on:
   push:

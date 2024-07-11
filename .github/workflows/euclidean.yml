@@ -1,4 +1,4 @@
-name: UFT CI
+name: EUCLIDEAN CI
 
 on:
   push:
