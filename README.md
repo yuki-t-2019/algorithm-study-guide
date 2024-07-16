@@ -60,6 +60,9 @@ algorithm-study-guide/
 │   │   ├── ...
 │   └── sieve-of-eratosthenes
 │       ├── ...
+├── search_algorithms
+│   └── binary_search
+│       ├── ...
 ├── tree_algorithms
 │   ├── bst
 │   │   ├── ...
@@ -108,6 +111,10 @@ The Euclidean Algorithm is a method for finding the greatest common divisor (GCD
 
 #### Sieve of Eratosthenes
 The Sieve of Eratosthenes is an efficient algorithm for finding all prime numbers up to a given limit. It works by iteratively marking the multiples of each prime number starting from 2. This algorithm is particularly effective for generating a list of primes up to a large number, n, and is more efficient than checking each number for primality individually.
+
+### Search Algorithms
+#### Binary Search
+Binary Search is a search algorithm that finds the position of a target value within a sorted array. It works by repeatedly dividing the search interval in half. If the target value is equal to the middle element of the interval, the search is successful. If the target value is less than the middle element, the search continues in the lower half, otherwise it continues in the upper half. This process continues until the target value is found or the interval is empty. Binary Search has a time complexity of O(log n), making it efficient for large datasets.
 
 **Note:**
 While these algorithms are implemented for educational purposes, many of them are available in standard libraries of various programming languages. For practical applications, it is recommended to use these libraries for optimized and well-tested implementations.
